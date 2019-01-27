@@ -1,0 +1,32 @@
+step 1 先建立virtual environment去跑Django
+--> cmd 
+--> cd 到目的檔案
+-->virtualenv <name of env>
+step 2 進入virtualenv 中下download django
+-->Scripts\activates
+--><name of env> pip install django
+step 3 start projects
+註:在activates env 的情況下 startproject (開始專案)
+--><name of env>django-admin startproject <name of project>
+step 4 app set up
+--><name of env>cd <name of project>
+--><name of env>py manage.py startapp <name of app>
+step 5 templates 放入顯示介面那些東西
+簡單來說是HTML
+project 中放入
+-->mkdir tamplates
+step 6 static 目錄 放入CSS or java scripts那些
+-->mkdir static
+如下圖
+--<name of project>
+----<name of app>
+------xx.py
+------xx.py
+----templates
+----static
+
+step 7 database set up
+-->py manage.py makemigrations
+
+step 8 test it 
+py manage.py runserver
