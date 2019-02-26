@@ -1,0 +1,23 @@
+github download !!
+
+step 1 找到leesinbaka 用戶 (我)
+step 2 https://github.com/Leesinbaka?tab=repositories
+step 3 按project of sharing abs (我們專題的名字)
+
+step 4 進去看到 clone or download (download on zip)
+
+
+step 5 去cmd 用cd <-- 到DjangoEnv
+for example: C:\Users\Him\Desktop\2019專題\Django\DjangoEnv
+
+step 6 打 Scripts\activate.bat
+這樣我們就會進到 virtual envornment 中
+
+step 7 cd..
+
+step 8 cd 到sharingabs 這個檔案 
+
+step 9 pip install django
+
+step 10 那如果有download python 
+就可以打 py manage.py runserver 去開test 網頁

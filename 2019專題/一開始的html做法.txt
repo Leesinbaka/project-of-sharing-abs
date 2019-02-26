@@ -1,0 +1,22 @@
+我們會用到 views.py        urls.py      加入的html file
+
+
+views.py 中打入
+-----------------------------------------
+from django.shortcuts import render
+
+def firsthtml(request):
+    return render(request,"firstpage.html",locals())
+------------------------------------------
+
+urls.py 中打入
+------------------------------------------
+path('firstpage/',firsthtml),
+------------------------------------------
+
+把html檔案建在templates中
+for example :
+
+firstpage.html
+
+我在firstpage中打入<h1>FUCK</h1>

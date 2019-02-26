@@ -1,0 +1,25 @@
+建一個hello world first page
+會用到 views.py 和 urls.py 
+
+views.py 是用來打function的
+
+urls.py 是用來如何建link
+
+view.py 中打入
+-------------------------------------------
+from django.http import HttpResponse
+
+def index(request):
+    return HttpResponse("Hello")
+-------------------------------------------
+
+
+urls.py 中打入
+-------------------------------------------
+from app.views import *             #<------
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', index),                             #<----
+]
+-------------------------------------------
