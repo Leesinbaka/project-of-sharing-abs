@@ -1,10 +1,13 @@
+會用到的有 cmd models.py view.py(做一些例子)
+---------------------------------------------------------
+step 1 在models.py 中 打入資料格式
 from django.db import models
 
 # Create your models here.
 class user(models.Model):
     Uname = models.CharField(max_length=30,null=False)
     sex = (("Male","M"),("Female","F"))
-    Usex = models.CharField(choices=sex,max_length=2,null=False)
+    Usex = models.CharField(choices=sex,null=False)
     Uphone = models.CharField(max_length=30,null=False)
     Uaddress = models.CharField(max_length=100,null=False)
     UAcname = models.CharField(max_length=2,null=False) # account name ID
@@ -20,3 +23,15 @@ class company(models.Model):
     Cemail = models.EmailField(null=False)
     def __str__(self):
         return self.Cname
+
+註: return 那個是用那個當主要顯示的，在admin site 中作的顯示
+
+step 2 當建好我們的資料格式，便可以到cmd輸入(到網站那個files)
+py manage.py makemigrations
+這一步是建立模型(Models)
+
+step 3 建立模型之後了，便可以到cmd輸入
+py manage.py migrate
+這一步是把模型跟資料庫作同步(connect to Database)
+
+那資料便可以save 了(done)
