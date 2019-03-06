@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index),
     path('firstpage/',firsthtml),
+    path('testdata/',modelstest),
 ]

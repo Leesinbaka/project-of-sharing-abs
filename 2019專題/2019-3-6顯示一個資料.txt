@@ -1,0 +1,48 @@
+需要用到admin.py views.py urls.py html
+
+step 1 我們需要用admin來把之前打的資料型態在admin register
+這一步是用來我們可以用admin page來新增資料
+admin.py
+-------------------------------------------------------------------
+from django.contrib import admin
+from app.models import user,company,mission#<--
+# Register your models here.
+admin.site.register(user)#<--
+admin.site.register(company)#<--
+admin.site.register(mission)#<--
+-------------------------------------------------------------------
+step 2 views.py 打入function :3
+views.py
+-------------------------------------------------------------------
+from app.models import user
+
+def modelstest(request):
+    try:
+        data = user.objects.get(Uname="李浚謙")#read 李浚謙 的資料
+        success = "(讀取成功)"
+    except:
+        errormessage = "(Error)"
+    return render(request,"testdata.html",locals())
+-------------------------------------------------------------------
+當然Uname是對到models中打入的那些變數的:3
+step 3 html的打法:3
+我用了testdata.html這個名字
+testdata.html
+-------------------------------------------------------------------
+<h1>讀取第一筆資料{{errormessage}}</h1><h4>{{success}}</h4>
+<body>
+        真實名字:{{data.Uname}}<br>
+        性別:{{data.Usex}}<br>
+        電話:{{data.Uphone}}<br>
+        地址:{{data.Uaddress}}<br>
+        用戶名稱:{{data.UAcname}}<br>
+        電子郵件:{{data.Uemail}}<br>
+        生日日期:{{data.Ubirthday}}<br>
+    </body>
+-------------------------------------------------------------------
+step 4 當然便是url的:3加入
+urls.py
+-------------------------------------------------------------------
+
+path('testdata/',modelstest),
+-------------------------------------------------------------------

@@ -26,7 +26,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('Uname', models.CharField(max_length=30)),
-                ('Usex', models.CharField(choices=[('Male', 'M'), ('Female', 'F')], max_length=2)),
+                ('Usex', models.CharField(choices=[('Male', 'M'), ('Female', 'F')], max_length=7)),
                 ('Uphone', models.CharField(max_length=30)),
                 ('Uaddress', models.CharField(max_length=100)),
                 ('UAcname', models.CharField(max_length=2)),
