@@ -4,10 +4,10 @@ from django.db import models
 class user(models.Model):
     Uname = models.CharField(max_length=30,null=False)
     sex = (("Male","M"),("Female","F"))
-    Usex = models.CharField(choices=sex,max_length=2,null=False)
+    Usex = models.CharField(choices=sex,max_length=7,null=False)
     Uphone = models.CharField(max_length=30,null=False)
     Uaddress = models.CharField(max_length=100,null=False)
-    UAcname = models.CharField(max_length=2,null=False) # account name ID
+    UAcname = models.CharField(max_length=20,null=False) # account name ID
     Uemail = models.EmailField(null=False)
     Ubirthday = models.DateField(null=False)
     def __str__(self):
@@ -20,3 +20,9 @@ class company(models.Model):
     Cemail = models.EmailField(null=False)
     def __str__(self):
         return self.Cname
+
+class mission(models.Model):
+    Mtitle = models.CharField(max_length=40,null=False)
+    Mpost = models.CharField(max_length=400,null=False)
+    def __str__(self):
+        return self.Mtitle
