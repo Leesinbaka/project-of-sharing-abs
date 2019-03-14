@@ -1,0 +1,21 @@
+用到 views.py firstpage.html
+
+step 1 views.py
+--------------------------------------------------------------
+from app.models import mission
+def firsthtml(request):
+    now = datetime.now()
+    missions = mission.objects.all()
+    return render(request,"firstpage.html",locals())
+--------------------------------------------------------------
+step 2 firstpage.html
+--------------------------------------------------------------
+<h2>任務列表</h2>
+{% for m in missions %}
+任務名稱:{{m.Mtitle}}</br>
+任務內容:{{m.Mpost}}</br>
+任務評分:{{m.Mrating}}</br>
+觀看人數:{{m.count}}</br>
+</br>
+{% endfor %}
+--------------------------------------------------------------
