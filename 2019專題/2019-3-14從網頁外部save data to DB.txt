@@ -1,0 +1,35 @@
+用到views.py post.html
+
+step 1 views.py
+--------------------------------------------------------------
+def post(request):
+    if request.method == "POST":
+        title = request.POST['title']
+        post = request.POST['post']
+        save = mission.objects.create(Mtitle = title,Mpost = post)
+        save.save()
+        mess ="input succeeded"
+        return redirect('/firstpage/')
+    else:
+        mess ="error"
+    return render(request,"post.html",locals())
+--------------------------------------------------------------
+step 2 html
+--------------------------------------------------------------
+<html>
+    <head>
+        <h1>Sharing Abs</h1>
+    </head>
+    <body>
+        <form action="/post/" method ="POST" name="form1">
+        {% csrf_token %}
+        <div>
+            請輸入任務題目:<input type="text" name="title">
+            請輸入任務內容:<input type="text" name="post">
+            <input type="submit" name="comfirm">
+        </div>
+        <div>{{mess}}</div>
+        </form>
+
+    </body>
+</html>
