@@ -1,10 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-<h1>{{haha.title}}</h1>
+<h2>Sharing Abs</h2>
 </head>
 <body>
+{% block content %}
+<h2>任務列表</h2>
+{% for m in missions %}
+任務名稱:{{m.Mtitle}}</br>
+任務內容:{{m.Mpost}}</br>
+任務評分:{{m.Mrating}}</br>
+觀看人數:{{m.count}}</br>
+</br>
+{% endfor %}
+{% endblock %}
 <h3>time now is : {{now}}</h3>
-
 </body>
 </html>

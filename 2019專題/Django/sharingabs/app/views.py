@@ -8,11 +8,15 @@ def index(request):
 
 
 from django.shortcuts import render
-words = ["cat","dog","hello world"]#用來測試
+from app.models import mission
+#words = ["cat","dog","hello world"]#用來測試
 def firsthtml(request):
     now = datetime.now()
-    haha ={'title':words[1]}
+    #haha ={'title':words[1]}
+    missions = mission.objects.all()
     return render(request,"firstpage.html",locals())
+
+
 
 from app.models import user
 def modelstest(request):
@@ -22,3 +26,10 @@ def modelstest(request):
     except:
         errormessage = "(Error)"
     return render(request,"testdata.html",locals())
+
+
+# def post(request):
+#     if request.method == "POST":
+#         Mname = request.POST['Mname']
+#         Mpost = request.POST['Mpost']
+#     return render(request,"post.html",locals())
