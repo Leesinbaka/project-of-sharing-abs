@@ -7,7 +7,7 @@ def index(request):
 
 
 
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from app.models import mission
 #words = ["cat","dog","hello world"]#用來測試
 def firsthtml(request):
@@ -28,8 +28,14 @@ def modelstest(request):
     return render(request,"testdata.html",locals())
 
 
-# def post(request):
-#     if request.method == "POST":
-#         Mname = request.POST['Mname']
-#         Mpost = request.POST['Mpost']
-#     return render(request,"post.html",locals())
+def post(request):
+    if request.method == "POST":
+        title = request.POST['title']
+        post = request.POST['post']
+        save = mission.objects.create(Mtitle = title,Mpost = post)
+        save.save()
+        mess ="input succeeded"
+        return redirect('/firstpage/')
+    else:
+        mess ="error"
+    return render(request,"post.html",locals())

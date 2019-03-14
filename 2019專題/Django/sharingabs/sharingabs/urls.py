@@ -21,4 +21,5 @@ urlpatterns = [
     path('', index),
     path('firstpage/',firsthtml),
     path('testdata/',modelstest),
+    path('post/',post),
 ]

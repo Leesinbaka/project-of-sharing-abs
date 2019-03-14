@@ -31,6 +31,6 @@ class mission(models.Model):
     (4, '非常好'),
     (5, '_(:3'))
     Mrating = models.IntegerField(choices=Rating_CHOICES, default=5)
-    count = models.IntegerField(default=0,null=False)
+    count = models.IntegerField(default=0)
     def __str__(self):
         return self.Mtitle
