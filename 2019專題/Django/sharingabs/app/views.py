@@ -2,15 +2,12 @@ from django.shortcuts import render
 # Create your views here.
 from django.http import HttpResponse
 from datetime import datetime
-def index(request):
-    return HttpResponse("Hello")
-
 
 
 from django.shortcuts import render,redirect
 from app.models import mission
 #words = ["cat","dog","hello world"]#用來測試
-def firsthtml(request):
+def firstpage(request):
     now = datetime.now()
     #haha ={'title':words[1]}
     missions = mission.objects.all()
@@ -35,7 +32,7 @@ def post(request):
         save = mission.objects.create(Mtitle = title,Mpost = post)
         save.save()
         mess ="input succeeded"
-        return redirect('/firstpage/')
+        return redirect('/')
     else:
         mess ="error"
     return render(request,"post.html",locals())
