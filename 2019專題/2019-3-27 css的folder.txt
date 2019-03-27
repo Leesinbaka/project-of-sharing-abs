@@ -1,0 +1,24 @@
+會用到的是 html setting.py 
+step 1 setting.py中加入css folder的路徑
+---------------------------------------------------------------------
+STATIC_URL = '/static/'
+SITE_ROOT = os.path.join(os.path.abspath(os.path.dirname(__file__)), '..')
+STATIC_ROOT = os.path.join(SITE_ROOT, 'static')
+STATICFILES_DIRS = (
+("css", os.path.join(STATIC_ROOT, 'css')),
+("js", os.path.join(STATIC_ROOT, 'js')),
+("images", os.path.join(STATIC_ROOT, 'images')),
+)
+---------------------------------------------------------------------
+step 2 css folder 中加入 xxx.css
+---------------------------------------------------------------------
+step 3 html 中加入
+{% load staticfiles %}     <--
+<head>
+<h2>Sharing Abs</h2>
+<link rel="stylesheet" href="{% static 'css/button.css' %}">  <--
+
+
+之後我們便可以
+<input type="button" class="button" value="post" />
+使用class 中的東西

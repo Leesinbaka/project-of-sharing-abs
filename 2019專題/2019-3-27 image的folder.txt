@@ -1,0 +1,25 @@
+會用到的是 html setting.py 
+step 1 setting.py中加入images folder的路徑
+---------------------------------------------------------------------
+STATIC_URL = '/static/'
+SITE_ROOT = os.path.join(os.path.abspath(os.path.dirname(__file__)), '..')
+STATIC_ROOT = os.path.join(SITE_ROOT, 'static')
+STATICFILES_DIRS = (
+("css", os.path.join(STATIC_ROOT, 'css')),
+("js", os.path.join(STATIC_ROOT, 'js')),
+("images", os.path.join(STATIC_ROOT, 'images')),
+)
+他會長這個樣子
+-sharingabs (project name) 
+    -app
+    -static
+        -css
+        -images
+            -xxx.png
+        -js
+    -templates
+---------------------------------------------------------------------
+step 2 在html 打入
+<img src="/static/images/titleicon.jpg">
+
+便可以使用圖片
