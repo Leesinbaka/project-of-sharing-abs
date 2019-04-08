@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 {% load staticfiles %}
+
 <head>
 <h2>Sharing Abs</h2>
 <link rel="stylesheet" href="{% static 'css/button.css' %}">
@@ -13,13 +14,22 @@
 任務名稱:{{m.Mtitle}}</br>
 任務內容:{{m.Mpost}}</br>
 任務評分:{{m.Mrating}}</br>
+發文者:{{m.Mname}}</br>
 觀看人數:{{m.count}}</br>
 </br>
 {% endfor %}
 <h3>time now is : {{now}}</h3>
 <a href="/post/">
-    <input type="button" class="button" value="post" />
- </a>
+    <input type="button" class="button" value="post"/>
+  </a>
+  </br>
+<a href="/login/">
+  <input type="button" class="button" value="login" />
+  </a>
+<a href="/logout/">
+  <input type="button" class="button" value="logout" />
+  </a>
 </body>
 {% endblock %}
+
 </html>
