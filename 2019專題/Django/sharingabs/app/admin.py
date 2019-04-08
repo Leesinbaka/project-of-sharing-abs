@@ -1,6 +1,4 @@
 from django.contrib import admin
-from app.models import user,company,mission
+from app.models import mission
 # Register your models here.
-admin.site.register(user)
-admin.site.register(company)
 admin.site.register(mission)

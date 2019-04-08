@@ -19,6 +19,8 @@ from app.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', firstpage),
-    path('testdata/',modelstest),
     path('post/',post),
+    path('login/',login),
+    path('register/',register),
+    path('logout/',logout),
 ]

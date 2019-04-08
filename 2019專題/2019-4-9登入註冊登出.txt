@@ -1,0 +1,96 @@
+login logout register
+我們會用到的是Django 中的  admin auth
+views.py 中加入 register login logout function
+加入 register.html login.html
+-----------------------------------------------------------
+from django.contrib import auth
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate
+from django.contrib.auth.models import User
+-----------------------------------------------------------
+step 1 register function
+-----------------------------------------------------------
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            return redirect('/')
+    else:
+        form = UserCreationForm()
+    return render(request,"register.html",locals())
+-----------------------------------------------------------
+step 2 login function
+-----------------------------------------------------------
+def login(request):
+    if request.method =='POST':
+        name = request.POST['username']
+        password = request.POST['password']
+        user = auth.authenticate(username=name,password=password)
+        if user is not None:
+            if user.is_active:
+                auth.login(request,user)
+                message='sucess'
+                return redirect('/')
+            else:
+                message='nothing here'
+        else:
+            message='failed'
+    return render(request,"login.html",locals())
+-----------------------------------------------------------
+step 3 logout
+-----------------------------------------------------------
+def logout(request):
+    auth.logout(request)
+    return redirect('/')
+-----------------------------------------------------------
+
+
+當然的urls.py 中也加入我們的path
+from django.contrib import admin
+from django.urls import path
+from app.views import *
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', firstpage),
+    path('post/',post),
+    path('login/',login),
+    path('register/',register),
+    path('logout/',logout),
+]
+-----------------------------------------------------------
+login.html 不加css 的簡單version
+
+{% load staticfiles %}
+<html>
+    <head>
+        <title>login page</title>
+        
+    </head>
+    <body>
+        <form action="." method="POST" name="form1">
+            {% csrf_token %}
+            account:<input type="text" name="username" id="username"/>
+            password:<input type="password" name="password" id="password"/>
+            <input type="submit" name="button" id="button" value="login"/>
+            {{message}}
+        </form>
+        <a href="/register/"><input type="submit" name="button" id="button" value="signup"/></a>
+    </body>
+</html>
+-----------------------------------------------------------
+register.html 不加css 的簡單version
+<html>
+<head>
+<title>Register</title>
+</head>
+<body>
+    <h1>註冊新帳號</h1>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="register">
+    </form>
+</body>
+</html>
+-----------------------------------------------------------

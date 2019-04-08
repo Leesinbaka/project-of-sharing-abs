@@ -1,4 +1,5 @@
 <html>
+        {% if request.user.is_authenticated %}
     <head>
         <h1>Sharing Abs</h1>
     </head>
@@ -8,10 +9,17 @@
         <div>
             請輸入任務題目:<input type="text" name="title">
             請輸入任務內容:<input type="text" name="post">
+            <h4>idname : {{user.username}}</h4>
             <input type="submit" name="comfirm">
         </div>
         <div>{{mess}}</div>
         </form>
 
     </body>
+    {% else %}
+<html>
+  <h1>未登入</h1>
+  <a href="/login/"><input type="button" class="button" value="login" /></a>
+{% endif %}
+</html>
 </html>

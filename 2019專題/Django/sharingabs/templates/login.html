@@ -1,0 +1,20 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <title>login page</title>
+        
+    </head>
+    <body>
+        <form action="." method="POST" name="form1">
+            {% csrf_token %}
+            account:<input type="text" name="username" id="username"/>
+            password:<input type="password" name="password" id="password"/>
+            <input type="submit" name="button" id="button" value="login"/>
+            {{message}}
+        </form>
+        <a href="/register/"><input type="submit" name="button" id="button" value="signup"/></a>
+    </body>
+</html>
+
+
+
