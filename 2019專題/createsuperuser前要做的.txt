@@ -1,0 +1,3 @@
+py manage.py migrate
+¦A¶]
+py manage.py createsuperuser

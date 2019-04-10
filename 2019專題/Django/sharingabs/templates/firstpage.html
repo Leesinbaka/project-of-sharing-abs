@@ -1,34 +1,62 @@
 <!DOCTYPE html>
 <html>
 {% load staticfiles %}
-
+{% block content %}
 <head>
 <h2>Sharing Abs</h2>
 <link rel="stylesheet" href="{% static 'css/button.css' %}">
-<img src="/static/images/titleicon.jpg" width="1200" height="500" alt="" style="display:block; margin:auto;"/>
+<!-- <img src="/static/images/titleicon.jpg" width="1200" height="500" alt="" style="display:block; margin:auto;"/> -->
 </head>
 <body>
-{% block content %}
 <h2>任務列表</h2>
-{% for m in missions %}
-任務名稱:{{m.Mtitle}}</br>
-任務內容:{{m.Mpost}}</br>
-任務評分:{{m.Mrating}}</br>
-發文者:{{m.Mname}}</br>
-觀看人數:{{m.count}}</br>
-</br>
-{% endfor %}
+  <div class="contentbox">
+      <table width="50%">
+      <tr>
+      <td>標題</td>
+      <td>發文者</td>
+      <td>發文時間</td>
+      <td>點撃數</td>
+      </tr>
+      {% for m in units %}
+      <tr>
+      <td><a href="/detail/{{m.id}}/">{{ m.Mtitle }}</a></td>
+      <td>{{ m.Mname }}</td>
+      <td>{{ m.postime }}</td>
+      <td>{{ m.count }}</td>
+      </br>
+      </tr>
+      {% endfor %}
+      </table>
+  </div>
 <h3>time now is : {{now}}</h3>
 <a href="/post/">
     <input type="button" class="button" value="post"/>
   </a>
-  </br>
+  <br>
 <a href="/login/">
   <input type="button" class="button" value="login" />
   </a>
+  <br>
 <a href="/logout/">
   <input type="button" class="button" value="logout" />
   </a>
+  <br>
+  <div class="pagefunction">
+  {% if currentpage > 1 %}
+    <a href="/firstpage/1/" title="prevpage">
+    上一頁
+    </a>
+  {% endif %}
+    <br>
+  {% if currentpage < totalpage %}
+  <a href="/firstpage/2/" title="nextpage">
+    下一頁
+    </a>
+    {% endif %}
+
+
+
+  </div>
 </body>
 {% endblock %}
 
