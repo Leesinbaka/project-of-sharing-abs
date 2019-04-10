@@ -1,4 +1,4 @@
-step 1 先建立virtual environment去跑Django
+step先建立virtual environment去跑Django
 --> cmd 
 --> cd 到目的檔案
 -->virtualenv <name of env>
