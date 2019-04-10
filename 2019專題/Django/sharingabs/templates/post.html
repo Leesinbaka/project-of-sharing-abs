@@ -7,8 +7,8 @@
         <form action="/post/" method ="POST" name="form1">
         {% csrf_token %}
         <div>
-            請輸入任務題目:<input type="text" name="title">
-            請輸入任務內容:<input type="text" name="post">
+            請輸入任務題目:<input type="text" name="title" required>
+            請輸入任務內容:<input type="text" name="post"required>
             <h4>idname : {{user.username}}</h4>
             <input type="submit" name="comfirm">
         </div>

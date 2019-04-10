@@ -1,0 +1,63 @@
+用到的是 views.py , firstpage.html , detail.html
+step 1 view.py
+---------------------------------------------------------------------
+def firstpage(request,pageindex = None):
+    missions = mission.objects.all().order_by('-id')#FILO First In Last Out 
+return render(request,"firstpage.html",locals())
+
+---------------------------------------------------------------------
+def detail(request,detailid=None):
+    id = mission.objects.get(id = detailid)
+    title = id.Mtitle
+    post = id.Mpost
+    name = id.Mname
+    postime = id.postime
+    rating = id.Mrating
+    count = id.count
+    id.count += 1
+    id.save()
+    return render(request,"detail.html",locals())
+---------------------------------------------------------------------
+step 2 firstpage.html
+---------------------------------------------------------------------
+  <div class="contentbox">
+      <table width="50%">
+      {% for m in units %}
+      <tr>
+      <td><a href="/detail/{{m.id}}/">{{ m.Mtitle }}</a></td>
+      <td>{{ m.Mname }}</td>
+      <td>{{ m.postime }}</td>
+      <td>{{ m.count }}</td>
+      </br>
+      </tr>
+      {% endfor %}
+      </table>
+  </div>
+---------------------------------------------------------------------
+step 3 detail.html
+---------------------------------------------------------------------
+<html>
+    <head>
+    </head>
+    <body>
+        <div class="info">
+        <br>{{title}}
+        <br>{{post}}
+        <br>{{rating}}
+        <br>{{postime}}
+        <br>{{count}}
+    </div>
+    <div class="pagefunction">
+        <a href="/firstpage/3">回首頁</a>
+        <a href="/delete/{{id.id}}">Delete Post</a>
+    </div>
+    </body>
+</html>
+---------------------------------------------------------------------
+step 4 urls.py
+---------------------------------------------------------------------
+from django.conf.urls import url #用這個才可以用來打function //r'^firstpage/(\d+)/$'
+    url(r'^firstpage/$', views.firstpage),
+    url(r'^firstpage/(\d+)/$',views.firstpage),
+    url(r'^detail/(\d+)/$',views.detail), 
+     /(\d+)/  #是用來設立id

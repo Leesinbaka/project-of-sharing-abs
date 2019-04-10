@@ -1,0 +1,24 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <div class="info">
+        <br>{{title}}
+        <br>{{post}}
+        <br>{{rating}}
+        <br>{{postime}}
+        <br>{{count}}
+    </div>
+    <div class="pagefunction">
+        <a href="/firstpage/3">回首頁</a>
+        {% if user.is_superuser %}
+        <a href="/delete/{{id.id}}">Delete Post</a>
+        {% else %}
+        <h5>如要刪文請聯絡管理員</h5>
+        {% endif %}
+    </div>
+    
+
+    </body>
+</html>
