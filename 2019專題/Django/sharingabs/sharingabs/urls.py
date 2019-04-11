@@ -19,10 +19,11 @@ from django.conf.urls import url #用這個才可以用來接收
 from app import views
 urlpatterns = [
     path('admin/', admin.site.urls),
-    
+
     url(r'^firstpage/$', views.firstpage),
     url(r'^firstpage/(\d+)/$',views.firstpage),
     url(r'^detail/(\d+)/$',views.detail),
+    path('mycase/',views.case),
 
     path('post/',views.post),
     url(r'^delete/(\d+)/$',views.delpost),
@@ -30,4 +31,5 @@ urlpatterns = [
     path('login/',views.login),
     path('register/',views.register),
     path('logout/',views.logout),
+    url(r'^addcase/(\d+)/$',views.addcase),
 ]

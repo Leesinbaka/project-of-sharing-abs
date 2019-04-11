@@ -1,0 +1,26 @@
+<html>
+    <head>
+        My Case List
+    </head>
+    <body>
+        <br>用戶名稱:{{n}}
+        <div class="contentbox">
+            <table>
+                <tr>
+                        <td>任務名稱</td>
+                        <td>任務status</td>
+                        <td>任務時間</td>
+                </tr>
+                {% for c in data1 %}
+                <tr>
+                    {% if n == c.username %}
+                    <td><a href="/detail/{{c.caseid}}">{{c.case}}</a></td>
+                    <td>{{c.casestatus}}</td>
+                    <td>{{c.casetime}}</td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </table>
+        </div>
+    </body>
+</html>
