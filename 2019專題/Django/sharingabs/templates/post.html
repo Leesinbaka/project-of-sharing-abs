@@ -8,7 +8,11 @@
         {% csrf_token %}
         <div>
             請輸入任務題目:<input type="text" name="title" required>
-            請輸入任務內容:<input type="text" name="post"required>
+            請輸入任務內容:<input type="textarea" name="post"required>
+            Deadline:<input type="date"name="deadline"required>
+            Money:<input type="number"name="money"required>
+            Status:<input type="checkbox"name="status"value="True">
+            Rating:<input type="number" name="rating" pattern="[1-5]" maxlength="1" required>
             <h4>idname : {{user.username}}</h4>
             <input type="submit" name="comfirm">
         </div>

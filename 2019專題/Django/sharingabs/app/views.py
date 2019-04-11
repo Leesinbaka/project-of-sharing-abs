@@ -62,7 +62,15 @@ def post(request):
             title = request.POST['title']
             post = request.POST['post']
             name = request.user.get_username()
-            save = mission.objects.create(Mtitle = title,Mpost = post,Mname = name)
+            deadline = request.POST['deadline']
+            money = request.POST['money']
+            status1 = request.POST.get('status', '') == 'on'
+            if status1 == None:
+                status1 = False
+            else:
+                status1 = True
+            rating1 = request.POST['rating']
+            save = mission.objects.create(Mtitle = title,Mpost = post,Mname = name,deadline=deadline,status=status1,money=money,Mrating=rating1)
             save.save()
             mess ="input succeeded"
             return redirect('/firstpage/')
@@ -109,7 +117,23 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return redirect('/firstpage/')
+from app.models import userdata
 
-def addpost(request):
+def addcase(request,detailid=None):
     name = request.user.get_username()
+    caseid = mission.objects.get(id = detailid)
+    id = caseid.id
+    case = caseid.Mtitle
+    sta = caseid.status
+    deadline = caseid.deadline
+    caseid.numofworker += 1
+    caseid.nameofaccept += (name+',')
+    caseid.save()
+    save = userdata.objects.create(case = case,username = name,casestatus = sta,casetime = deadline,caseid = id)
+    save.save()
     return redirect('/firstpage/3')
+
+def case(request):
+    n = request.user.get_username()
+    data1 = userdata.objects.order_by('username')[:]
+    return render(request,'mycase.html',locals())
