@@ -13,10 +13,12 @@
                 </tr>
                 {% for c in data1 %}
                 <tr>
+                    {% if n == c.username %}
                     <td><a href="/detail/{{c.caseid}}">{{c.case}}</a></td>
                     <td>{{c.casestatus}}</td>
                     <td>{{c.casetime}}</td>
                 </tr>
+                {% endif %}
                 {% endfor %}
             </table>
         </div>
