@@ -26,6 +26,7 @@ class userdata(models.Model):
     case = models.CharField(max_length=100,null=False,default="maybe something wrong here")
     casestatus = models.BooleanField(default=False)
     casetime = models.DateField(auto_now=True)
+    daysremind = models.IntegerField(null=False,default=0)
     caseid = models.IntegerField(default=0)
     def __str__(self):
         return self.username

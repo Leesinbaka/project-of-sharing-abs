@@ -1,0 +1,26 @@
+<html>
+    <head>
+        My Post List
+    </head>
+    <body>
+        <br>用戶名稱:{{n}}
+        <div class="contentbox">
+            <table>
+                <tr>
+                        <td>任務名稱</td>
+                        <td>任務status</td>
+                        <td>任務時間</td>
+                </tr>
+                {% for u in units %}
+                <tr>
+                    {% if n == u.Mname %}
+                    <td><a href="/detail/{{u.id}}">{{u.Mtitle}}</a></td>
+                    <td>{{u.status}}</td>
+                    <td>{{u.posttime}}</td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </table>
+        </div>
+    </body>
+</html>

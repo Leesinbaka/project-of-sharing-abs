@@ -137,3 +137,8 @@ def case(request):
     n = request.user.get_username()
     data1 = userdata.objects.order_by('username')[:]
     return render(request,'mycase.html',locals())
+
+def mypost(request):
+    n = request.user.get_username()
+    units = mission.objects.order_by('Mname')[:]
+    return render(request,'mypost.html',locals())

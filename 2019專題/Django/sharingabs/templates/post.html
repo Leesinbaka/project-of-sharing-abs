@@ -12,7 +12,9 @@
             Deadline:<input type="date"name="deadline"required>
             Money:<input type="number"name="money"required>
             Status:<input type="checkbox"name="status"value="True">
-            Rating:<input type="number" name="rating" pattern="[1-5]" maxlength="1" required>
+            Rating:<input type="radio" name="rating" value="1"><input type="radio" name="rating" value="2">
+            <input type="radio" name="rating" value="3"><input type="radio" name="rating" value="4">
+            <input type="radio" name="rating" value="5">
             <h4>idname : {{user.username}}</h4>
             <input type="submit" name="comfirm">
         </div>
