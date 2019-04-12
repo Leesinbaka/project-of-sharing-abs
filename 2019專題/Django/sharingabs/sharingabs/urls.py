@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^firstpage/(\d+)/$',views.firstpage),
     url(r'^detail/(\d+)/$',views.detail),
     path('mycase/',views.case),
+    path('mypost/',views.mypost),
 
     path('post/',views.post),
     url(r'^delete/(\d+)/$',views.delpost),
