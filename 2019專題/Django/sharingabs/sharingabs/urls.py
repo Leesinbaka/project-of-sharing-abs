@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url #用這個才可以用來接收
 from app import views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
 

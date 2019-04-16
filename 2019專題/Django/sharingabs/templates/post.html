@@ -4,7 +4,7 @@
         <h1>Sharing Abs</h1>
     </head>
     <body>
-        <form action="/post/" method ="POST" name="form1">
+        <form action="/post/" method ="POST" name="form1" enctype="multipart/form-data">
         {% csrf_token %}
         <div>
             請輸入任務題目:<input type="text" name="title" required>
@@ -15,6 +15,7 @@
             Rating:<input type="radio" name="rating" value="1"><input type="radio" name="rating" value="2">
             <input type="radio" name="rating" value="3"><input type="radio" name="rating" value="4">
             <input type="radio" name="rating" value="5">
+            請輸入圖片:<input type="file" name="picture" id="picture" placeholder="Image"required>
             <h4>idname : {{user.username}}</h4>
             <input type="submit" name="comfirm">
         </div>

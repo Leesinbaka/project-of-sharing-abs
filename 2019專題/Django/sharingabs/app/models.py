@@ -16,18 +16,22 @@ class mission(models.Model):
     count = models.IntegerField(default=0)
     money = models.IntegerField(default=0)
     numofworker = models.IntegerField(default=0)
+    Mimage = models.ImageField(upload_to='images',default="haha")
     status = models.BooleanField(null=False,default=False) #connect casestatus
     deadline = models.DateField(auto_now=True) #connect casetime
-    nameofaccept = models.CharField(max_length=400,default="no one want it")
+    nameofaccept = models.CharField(max_length=400)
     def __str__(self):
         return self.Mtitle
 class userdata(models.Model):
     username = models.CharField(max_length=40,null=False)
+    address = models.CharField(max_length=100,null=False,default="no address here")
+    position = models.CharField(max_length=100,null=False,default="didnt write here")
     case = models.CharField(max_length=100,null=False,default="maybe something wrong here")
     casestatus = models.BooleanField(default=False)
     casetime = models.DateField(auto_now=True)
     daysremind = models.IntegerField(null=False,default=0)
     caseid = models.IntegerField(default=0)
+    image = models.ImageField(upload_to='images',default="haha")
     def __str__(self):
         return self.username
 # Mtitle

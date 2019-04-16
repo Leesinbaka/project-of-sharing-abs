@@ -35,13 +35,16 @@
     <input type="button" class="button" value="post"/>
   </a>
   <br>
-<a href="/login/">
-  <input type="button" class="button" value="login" />
-  </a>
-  <br>
-<a href="/logout/">
-  <input type="button" class="button" value="logout" />
-  </a>
+  {% if request.user.is_authenticated %}
+  <a href="/logout/">
+    <input type="button" class="button" value="logout" />
+    </a>
+  {% else %}
+  <a href="/login/">
+    <input type="button" class="button" value="login" />
+    </a>
+    <br>
+  {% endif %}
   <br>
   <div class="pagefunction">
   {% if currentpage > 1 %}
