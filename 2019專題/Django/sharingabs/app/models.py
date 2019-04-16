@@ -16,7 +16,7 @@ class mission(models.Model):
     count = models.IntegerField(default=0)
     money = models.IntegerField(default=0)
     numofworker = models.IntegerField(default=0)
-    Mimage = models.ImageField(upload_to='images',default="haha")
+    Mimage = models.ImageField(upload_to='imageformission',default="haha")
     status = models.BooleanField(null=False,default=False) #connect casestatus
     deadline = models.DateField(auto_now=True) #connect casetime
     nameofaccept = models.CharField(max_length=400)
@@ -31,7 +31,7 @@ class userdata(models.Model):
     casetime = models.DateField(auto_now=True)
     daysremind = models.IntegerField(null=False,default=0)
     caseid = models.IntegerField(default=0)
-    image = models.ImageField(upload_to='images',default="haha")
+    image = models.ImageField(upload_to='imageforcase',default="haha")
     def __str__(self):
         return self.username
 # Mtitle

@@ -17,7 +17,8 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url #用這個才可以用來接收
 from app import views
-
+from django.conf import settings #media 設定要加
+from django.conf.urls.static import static #media 設定要加
 urlpatterns = [
     path('admin/', admin.site.urls),
 
@@ -34,4 +35,4 @@ urlpatterns = [
     path('register/',views.register),
     path('logout/',views.logout),
     url(r'^addcase/(\d+)/$',views.addcase),
-]
+]   + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
