@@ -35,4 +35,4 @@ urlpatterns = [
     path('register/',views.register),
     path('logout/',views.logout),
     url(r'^addcase/(\d+)/$',views.addcase),
-]   + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]   + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # we need to add this to make those image visible

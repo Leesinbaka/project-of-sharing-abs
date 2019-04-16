@@ -69,7 +69,7 @@ def post(request):
             m.Mname = request.user.get_username()
             m.deadline = request.POST.get('deadline')
             m.money = request.POST.get('money')
-            m.Mimage = request.FILES['picture']
+            m.Mimage = request.FILES['picture']#image here
             status1 = request.POST.get('status', '') == 'on'
             if status1 == None:
                 status1 = False
