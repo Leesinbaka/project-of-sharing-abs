@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from datetime import datetime
 import math
-
+from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render,redirect
 from app.models import mission
 #words = ["cat","dog","hello world"]#用來測試
@@ -51,6 +51,10 @@ def detail(request,detailid=None):
     name = id.Mname
     postime = id.postime
     rating = id.Mrating
+    numofworker = id.numofworker
+    workername = id.nameofaccept
+    status = id.status
+    img = id.Mimage.url
     count = id.count
     id.count += 1
     id.save()
@@ -59,23 +63,25 @@ def detail(request,detailid=None):
 def post(request):
     if request.method == "POST":
         if request.user.is_authenticated:
-            title = request.POST['title']
-            post = request.POST['post']
-            name = request.user.get_username()
-            deadline = request.POST['deadline']
-            money = request.POST['money']
+            m = mission()
+            m.Mtitle = request.POST.get('title')
+            m.Mpost = request.POST.get('post')
+            m.Mname = request.user.get_username()
+            m.deadline = request.POST.get('deadline')
+            m.money = request.POST.get('money')
+            m.Mimage = request.FILES['picture']
             status1 = request.POST.get('status', '') == 'on'
             if status1 == None:
                 status1 = False
             else:
                 status1 = True
-            rating1 = request.POST['rating']
-            save = mission.objects.create(Mtitle = title,Mpost = post,Mname = name,deadline=deadline,status=status1,money=money,Mrating=rating1)
-            save.save()
+            m.status = status1
+            m.Mrating = request.POST['rating']
+            m.save()
             mess ="input succeeded"
             return redirect('/firstpage/')
     else:
-        mess ="error"
+        mess =""
     return render(request,"post.html",locals())
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.admin import UserAdmin
@@ -94,6 +100,7 @@ def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
+
             user = form.save()
             return redirect('/firstpage/')
     else:
@@ -114,6 +121,9 @@ def login(request):
         else:
             message='failed'
     return render(request,"login.html",locals())
+def accountedit(request):
+    name = request.user.get_username()
+
 def logout(request):
     auth.logout(request)
     return redirect('/firstpage/')
@@ -127,7 +137,7 @@ def addcase(request,detailid=None):
     sta = caseid.status
     deadline = caseid.deadline
     caseid.numofworker += 1
-    caseid.nameofaccept += (name+',')
+    caseid.nameofaccept += (name+' ')
     caseid.save()
     save = userdata.objects.create(case = case,username = name,casestatus = sta,casetime = deadline,caseid = id)
     save.save()
@@ -135,6 +145,7 @@ def addcase(request,detailid=None):
 
 def case(request):
     n = request.user.get_username()
+    now = datetime.now()
     data1 = userdata.objects.order_by('username')[:]
     return render(request,'mycase.html',locals())
 
