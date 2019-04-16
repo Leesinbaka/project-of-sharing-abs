@@ -90,7 +90,6 @@ def delpost(request,detailid=None):
         id = mission.objects.get(id = detailid)
         id.delete()
     return redirect("/firstpage/")
-
 # login , register , logout 的打法
 from django.contrib import auth
 from django.contrib.auth.forms import UserCreationForm
