@@ -69,7 +69,7 @@ def post(request):
             m.Mname = request.user.get_username()
             m.deadline = request.POST.get('deadline')
             m.money = request.POST.get('money')
-            m.Mimage = request.FILES['picture']
+            m.Mimage = request.FILES['picture']#image here
             status1 = request.POST.get('status', '') == 'on'
             if status1 == None:
                 status1 = False
@@ -90,7 +90,6 @@ def delpost(request,detailid=None):
         id = mission.objects.get(id = detailid)
         id.delete()
     return redirect("/firstpage/")
-
 # login , register , logout 的打法
 from django.contrib import auth
 from django.contrib.auth.forms import UserCreationForm
