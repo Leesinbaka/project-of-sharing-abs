@@ -3,14 +3,47 @@
 {% load staticfiles %}
 {% block content %}
 <head>
-<h2>Sharing Abs</h2>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="author" content="Flycan.com" />
+<title>共享廣告</title>
 <link rel="stylesheet" href="{% static 'css/button.css' %}">
+<link rel="stylesheet" href="{% static 'css/layout.css' %}">
+<link rel="stylesheet" href="{% static 'css/reset.css' %}">
 <!-- <img src="/static/images/titleicon.jpg" width="1200" height="500" alt="" style="display:block; margin:auto;"/> -->
 </head>
 <body>
-<h2>任務列表</h2>
-<h5><a href="/mycase/">mycase</a></h5>
-<h5><a href="/mypost/">mypost</a></h5>
+    <div id="HEADER">
+        {% if request.user.is_authenticated %}
+        <p align="right" style="font-size:0.8cm;" ><a href="/logout/" style="color:rgb(255, 255, 255);">登出</a></p>
+        {% else %}
+        <p align="right" style="font-size:0.8cm;" ><a href="/login/" style="color:rgb(255, 255, 255);">登入</a></p>
+         {% endif %}
+      </div>
+      <div id="WRAPPER">
+          <div id="SIDE">
+              {% if request.user.is_authenticated %}
+            <p><a href="/mycase/">我接受的任務</a></p>
+            <p><a href="/mypost/">我發放的文章</a></p>
+            {% endif %}
+          </div>
+          <div id="CONTENT">
+            <h5  align="center" valign="center" style="font-size:1.8cm;">任務列表</h5> 
+            <h3 align="right" valign="right">現時時間: {{now}}</h3>
+            <div class="BOX"> 
+              {% for m in units %}
+              <h2><a href="/detail/{{m.id}}/">{{ m.Mtitle }}</a></h2>
+              <td>{{ m.Mname }}</td>
+              <td>{{ m.postime }}</td>
+              <td>{{ m.count }}</td>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        <div id="FOOTER">
+            <h2>想打工?</h2>
+          </div>
+
+
   <div class="contentbox">
       <table width="50%">
       <tr>
@@ -30,22 +63,14 @@
       {% endfor %}
       </table>
   </div>
-<h3>time now is : {{now}}</h3>
+
+
+
 <a href="/post/">
     <input type="button" class="button" value="post"/>
   </a>
   <br>
-  {% if request.user.is_authenticated %}
-  <a href="/logout/">
-    <input type="button" class="button" value="logout" />
-    </a>
-  {% else %}
-  <a href="/login/">
-    <input type="button" class="button" value="login" />
-    </a>
-    <br>
-  {% endif %}
-  <br>
+
   <div class="pagefunction">
   {% if currentpage > 1 %}
     <a href="/firstpage/1/" title="prevpage">
