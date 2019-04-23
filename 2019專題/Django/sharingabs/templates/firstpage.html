@@ -11,12 +11,51 @@
 <link rel="stylesheet" href="{% static 'css/reset.css' %}">
 <!-- <img src="/static/images/titleicon.jpg" width="1200" height="500" alt="" style="display:block; margin:auto;"/> -->
 </head>
+<style type="text/css">
+  table.hovertable {
+    font-size:15px;
+    color:#000;
+    border-width: 1px;
+    border-color: #999999;
+    border-collapse: collapse;
+  }
+  table.hovertable a{
+    font-size:15px;
+    color:#000;
+    display: block;
+    text-align:center;
+  }
+  table.hovertable th {
+    background-color:#c3dde0;
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #a9c6c9;
+  }
+  table.hovertable tr {
+    background-color:#d4e3e5;
+  }
+  table.hovertable td {
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #a9c6c9;
+  }
+    </style>
+  <script>
+    function weblist_onmouseover(obj){
+    obj.style.backgroundColor='#ffff66';
+    }
+    function weblist_onmouseout(obj){
+    obj.style.backgroundColor='#d4e3e5';
+    }
+    </script>
 <body>
     <div id="HEADER">
         {% if request.user.is_authenticated %}
-        <p align="right" style="font-size:0.8cm;" ><a href="/logout/" style="color:rgb(255, 255, 255);">登出</a></p>
+        <p align="right"><a href="/logout/"><input type="button" class="button" value="登出"></a></p>
         {% else %}
-        <p align="right" style="font-size:0.8cm;" ><a href="/login/" style="color:rgb(255, 255, 255);">登入</a></p>
+        <p align="right"><a href="/login/"><input type="button" class="button" value="登入"></a></p>
          {% endif %}
       </div>
       <div id="WRAPPER">
@@ -29,65 +68,34 @@
           <div id="CONTENT">
             <h5  align="center" valign="center" style="font-size:1.8cm;">任務列表</h5> 
             <h3 align="right" valign="right">現時時間: {{now}}</h3>
-            <div class="BOX"> 
-              {% for m in units %}
-              <h2><a href="/detail/{{m.id}}/">{{ m.Mtitle }}</a></h2>
-              <td>{{ m.Mname }}</td>
-              <td>{{ m.postime }}</td>
-              <td>{{ m.count }}</td>
-              {% endfor %}
+              <table class="hovertable" width="100%">
+                <tr>
+                  <th width="100">標題</th><th width="150">發文者</th><th width="90">發文時間</th><th width="50">點撃數</th>
+                </tr>
+                {% for m in units %}
+                <tr onmouseover="weblist_onmouseover(this);" onmouseout="weblist_onmouseout(this);">
+                  <td><a href="/detail/{{m.id}}/" title="" target="_blank">{{ m.Mtitle }}</a></td>
+                  <td><center>{{ m.Mname }}</center></td>
+                  <td><center>{{ m.postime }}</center></td>
+                  <td>{{ m.count }}</td>
+                </tr><tr onmouseover="weblist_onmouseover(this);" onmouseout="weblist_onmouseout(this);">
+                  {% endfor %}
+                </table>
+                <div class="pagefunction">
+                  {% if currentpage > 1 %}
+                  <p align="center"><a href="/firstpage/1/" title="prevpage" align="center">上一頁</a></p>
+                  {% endif %}
+                    <br>
+                  {% if currentpage < totalpage %}
+                  <p align="center"><a href="/firstpage/2/" title="nextpage" align="center">下一頁</a></p>
+                    {% endif %}
+                  <p align="right"><a href="/post/"><input type="button" class="button" value="發文"/></a></p>
             </div>
           </div>
         </div>
         <div id="FOOTER">
             <h2>想打工?</h2>
           </div>
-
-
-  <div class="contentbox">
-      <table width="50%">
-      <tr>
-      <td>標題</td>
-      <td>發文者</td>
-      <td>發文時間</td>
-      <td>點撃數</td>
-      </tr>
-      {% for m in units %}
-      <tr>
-      <td><a href="/detail/{{m.id}}/">{{ m.Mtitle }}</a></td>
-      <td>{{ m.Mname }}</td>
-      <td>{{ m.postime }}</td>
-      <td>{{ m.count }}</td>
-      </br>
-      </tr>
-      {% endfor %}
-      </table>
-  </div>
-
-
-
-<a href="/post/">
-    <input type="button" class="button" value="post"/>
-  </a>
-  <br>
-
-  <div class="pagefunction">
-  {% if currentpage > 1 %}
-    <a href="/firstpage/1/" title="prevpage">
-    上一頁
-    </a>
-  {% endif %}
-    <br>
-  {% if currentpage < totalpage %}
-  <a href="/firstpage/2/" title="nextpage">
-    下一頁
-    </a>
-    {% endif %}
-
-
-
-  </div>
 </body>
 {% endblock %}
-
 </html>

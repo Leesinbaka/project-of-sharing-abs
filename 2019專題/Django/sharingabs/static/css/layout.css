@@ -49,6 +49,24 @@ body {
 	padding:10px;
 	letter-spacing:1px;
 }
+#CONTENT .tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+#CONTENT .tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+#CONTENT .th{
+	height: 20px;
+    border: none;
+    vertical-align: baseline;
+}
+#CONTENT .tf{
+    padding: 3px 0;
+}
 #SIDE {
 	float:left;
 	width:170px;
