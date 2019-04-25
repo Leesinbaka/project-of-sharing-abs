@@ -7,8 +7,8 @@ body {
 }
 #HEADER {
 	margin:0 auto;
-	width:900px;
-	height:131px;
+	width:1480px;
+	height:150px;
 	background-image:url(images/top.jpg);
 }
 #HEADER h1 {
@@ -16,13 +16,14 @@ body {
 }
 #WRAPPER {
 	margin:0 auto;
-	width:880px;
+	width:1460px;
 	padding:0 10px;
 	background-image:url(images/center.jpg);
 	overflow:auto;
 }
 #CONTENT {
-	margin-left:170px;
+	margin-left:300px;
+	margin-right:20px;
 	_height:1%;
 	padding-top:15px;
 	padding-bottom:25px;
@@ -34,20 +35,20 @@ body {
 	margin-bottom:10px;
 }
 #CONTENT .BOX h2 {
-	font-size: 12px;
+	font-size: 30px;
 	font-family: Arial;
 	background-color: #8080C0;
 	color: #000000;
-	text-indent: 10px;
-	line-height: 30px;
+	text-indent: 205px;
+	line-height: 1.5;
 	letter-spacing: 1px;
 }
 #CONTENT .BOX p {
-	font-size:12px;
+	font-size:20px;
 	font-family:Arial;
-	line-height:18px;
+	line-height:1.5;
 	padding:10px;
-	letter-spacing:1px;
+	letter-spacing:2.5px;
 }
 #CONTENT .tbody {
     display: table-row-group;
@@ -69,11 +70,12 @@ body {
 }
 #SIDE {
 	float:left;
-	width:170px;
+	margin: 1%;
+	width:250px;
 	padding-top:15px;
 }
 #SIDE p {
-	font-size:12px;
+	font-size:20px;
 	font-family:Arial;
 	text-align:center;
 	padding:10px 20px;
@@ -89,7 +91,7 @@ body {
 	clear:both;
 	_height:1%;
 	margin:0 auto;
-	width:900px;
+	width:1480px;
 	height:121px;
 	background-image:url(images/down.jpg);
 }
