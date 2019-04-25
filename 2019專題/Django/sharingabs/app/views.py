@@ -127,7 +127,7 @@ def logout(request):
     auth.logout(request)
     return redirect('/firstpage/')
 from app.models import userdata
-
+from django.contrib import messages
 def addcase(request,detailid=None):
     name = request.user.get_username()
     caseid = mission.objects.get(id = detailid)
@@ -140,6 +140,7 @@ def addcase(request,detailid=None):
     caseid.save()
     save = userdata.objects.create(case = case,username = name,casestatus = sta,casetime = deadline,caseid = id)
     save.save()
+    messages.success(request,"新增了新的任務")
     return redirect('/firstpage/3')
 
 def case(request):
