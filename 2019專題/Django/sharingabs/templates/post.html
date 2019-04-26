@@ -1,32 +1,93 @@
+<!DOCTYPE html>
 <html>
-        {% if request.user.is_authenticated %}
-    <head>
-        <h1>Sharing Abs</h1>
-    </head>
-    <body>
-        <form action="/post/" method ="POST" name="form1" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div>
-            請輸入任務題目:<input type="text" name="title" required>
-            請輸入任務內容:<input type="textarea" name="post"required>
-            Deadline:<input type="date"name="deadline"required>
-            Money:<input type="number"name="money"required>
-            Status:<input type="checkbox"name="status"value="True">
-            Rating:<input type="radio" name="rating" value="1"><input type="radio" name="rating" value="2">
-            <input type="radio" name="rating" value="3"><input type="radio" name="rating" value="4">
-            <input type="radio" name="rating" value="5">
-            請輸入圖片:<input type="file" name="picture" id="picture" placeholder="Image"required>
-            <h4>idname : {{user.username}}</h4>
-            <input type="submit" name="comfirm">
-        </div>
-        <div>{{mess}}</div>
-        </form>
+{% if request.user.is_authenticated %}
+{% load staticfiles %}
+{% block content %}
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="author" content="Flycan.com" />
+<title>發佈文章</title>
+<link rel="stylesheet" href="{% static 'css/button.css' %}">
+<link rel="stylesheet" href="{% static 'css/layout.css' %}">
+<link rel="stylesheet" href="{% static 'css/reset.css' %}">
+<!-- <img src="/static/images/titleicon.jpg" width="1200" height="500" alt="" style="display:block; margin:auto;"/> -->
+</head>
 
-    </body>
-    {% else %}
+<body>
+    <div id="HEADER">
+      </div>
+
+      <div id="WRAPPER">  
+          <div id="CONTENT">
+                <form action="/post/" method ="POST" name="form1" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <h2>
+                        請輸入任務題目:<input type="text" name="title" required><br>
+                        請輸入任務內容:<input type="textarea" name="post"required><br>
+                        Deadline:<input type="date"name="deadline"required><br>
+                        Money:<input type="number"name="money"required><br>
+                        Status:<input type="checkbox"name="status"value="True"><br>
+                        Rating:<input type="radio" name="rating" value="1"><input type="radio" name="rating" value="2">
+                        <input type="radio" name="rating" value="3"><input type="radio" name="rating" value="4">
+                        <input type="radio" name="rating" value="5"><br>
+                        請輸入圖片:<input type="file" name="picture" id="picture" placeholder="Image"required><br>
+                        <h4>名字: {{user.username}}</h4>
+                        <input type="submit" name="comfirm">
+                    </h2>
+                    <div>{{mess}}</div>
+                    </form>
+          </div>
+      </div>
+
+        <div id="FOOTER">
+          </div>
+
+</body>
+{% endblock %}
+</html>
+
+
+
+
+{% else %}
 <html>
-  <h1>未登入</h1>
-  <a href="/login/"><input type="button" class="button" value="login" /></a>
+        <head>
+                <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+                <meta name="author" content="Flycan.com" />
+                <title>未登入</title>
+                <link rel="stylesheet" href="{% static 'css/button.css' %}">
+                <link rel="stylesheet" href="{% static 'css/layout.css' %}">
+                <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+                <!-- <img src="/static/images/titleicon.jpg" width="1200" height="500" alt="" style="display:block; margin:auto;"/> -->
+                </head>
+        <body>
+                <div id="HEADER">
+                  </div>
+            
+                  <div id="WRAPPER">  
+                      <div id="CONTENT">
+                            <h1 style="margin: 150px;margin-left: 500PX;margin-top: 250px;">未登入,請先登入!!<br>
+                            <a href="/login/"><input type="button" class="button" value="login" /></a></h1>
+                      </div>
+                      <div id="CONTENT">
+                      </div>
+                      <div id="CONTENT">
+                          <br> <br>
+                        </div>
+
+
+
+                  </div>
+            
+                    <div id="FOOTER">
+                      </div>
+            
+            </body>
+
+
+
+
 {% endif %}
 </html>
-</html>
+
+
