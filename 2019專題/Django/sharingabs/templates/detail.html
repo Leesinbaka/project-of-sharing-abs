@@ -1,23 +1,21 @@
+<!DOCTYPE html>
 <html>
-    <head>
+{% load staticfiles %}
+{% block content %}
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="author" content="Flycan.com" />
+<title>共享廣告</title>
+<link rel="stylesheet" href="{% static 'css/button.css' %}">
+<link rel="stylesheet" href="{% static 'css/layout.css' %}">
+<link rel="stylesheet" href="{% static 'css/reset.css' %}">
+<!-- <img src="/static/images/titleicon.jpg" width="1200" height="500" alt="" style="display:block; margin:auto;"/> -->
+</head>
 
-    </head>
-    <body>
-        <div class="info">
-        <br>任務標題:{{title}}
-        <br>任務內容:{{post}}
-        <br>難度等級:{{rating}}
-        <br>發文日期:{{postime}}
-        <br>點擊次數:{{count}}
-        <br>發文者:{{name}}
-        <br>有多少人願意參加:{{numofworker}}
-        <br>參加人名單:{{workername}}
-        <br>圖片:<img src="{{img}}">
-    </div>
-    <div class="pagefunction">
-        <a href="/firstpage/3">回首頁</a>
-        {% if user.is_superuser %}
-        <a href="/delete/{{id.id}}">Delete Post</a>
+<body>
+    <div id="HEADER">
+        {% if request.user.is_authenticated %}
+        <p align="right"><a href="/logout/"><input type="button" class="button" value="登出"></a></p>
         {% else %}
         <h5>如要刪文請聯絡管理員</h5>
         {% endif %}
@@ -34,6 +32,41 @@
         Like:{{qq.like}}
         {% endif %}
         {% endfor %}
+        
+        <p align="right"><a href="/login/"><input type="button" class="button" value="登入"></a></p>
+         {% endif %}
+      </div>
+      <div id="WRAPPER">
+          <div id="SIDE">
+                <p><a href="/firstpage/3">回首頁</a></p>
+                {% if user.is_superuser %}
+                <p><a href="/delete/{{id.id}}">刪除文章</a></p>
+                {% else %}
+                {% endif %}
+                <p><a href="/addcase/{{id.id}}/">加入我的任務列表</a></p>
 
-    </body>
+                <p>如要刪文請聯絡管理員</p>
+          </div>
+          <div id="CONTENT">
+                <div class="BOX">
+                <h2>任務標題:{{title}}</h2>
+                <p>任務內容:{{post}} <br>
+                難度等級:{{rating}}<br>
+                發文日期:{{postime}}<br>
+                點擊次數:{{count}}<br>
+                發文者:{{name}}<br>
+                有多少人願意參加:{{numofworker}}<br>
+                參加人名單:{{workername}}<br>
+                圖片:<br><img src="{{img}}" width="70%"></p>  
+                </div>
+
+
+
+          </div>
+        </div>
+        <div id="FOOTER">
+            <h2></h2>
+          </div>
+</body>
+{% endblock %}
 </html>

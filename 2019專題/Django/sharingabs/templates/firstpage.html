@@ -13,22 +13,22 @@
 </head>
 <style type="text/css">
   table.hovertable {
-    font-size:15px;
+    font-size:30px;
     color:#000;
     border-width: 1px;
     border-color: #999999;
     border-collapse: collapse;
   }
   table.hovertable a{
-    font-size:15px;
+    font-size:30px;
     color:#000;
     display: block;
     text-align:center;
   }
   table.hovertable th {
     background-color:#c3dde0;
-    border-width: 1px;
-    padding: 8px;
+    border-width: 5px;
+    padding: 10px;
     border-style: solid;
     border-color: #a9c6c9;
   }
@@ -36,8 +36,8 @@
     background-color:#d4e3e5;
   }
   table.hovertable td {
-    border-width: 1px;
-    padding: 8px;
+    border-width: 5px;
+    padding: 15px;
     border-style: solid;
     border-color: #a9c6c9;
   }
@@ -50,12 +50,14 @@
     obj.style.backgroundColor='#d4e3e5';
     }
     </script>
+
 <body>
     <div id="HEADER">
         {% if request.user.is_authenticated %}
         <p align="right"><a href="/logout/"><input type="button" class="button" value="登出"></a></p>
         {% else %}
         <p align="right"><a href="/login/"><input type="button" class="button" value="登入"></a></p>
+        <p align="right"><a href="/register/"><input type="button" class="button" value="註冊"></a></p>
          {% endif %}
       </div>
       <div id="WRAPPER">
@@ -68,8 +70,8 @@
           </div>
           <div id="CONTENT">
             <h5  align="center" valign="center" style="font-size:1.8cm;">任務列表</h5> 
-            <h3 align="right" valign="right">現時時間: {{now}}</h3>
-              <table class="hovertable" width="100%">
+            <h3 align="right" valign="right"> 現時時間: {{now}}</h3>
+              <table class="hovertable" width="99%">
                 <tr>
                   <th width="100">標題</th><th width="150">發文者</th><th width="90">發文時間</th><th width="50">點撃數</th>
                 </tr>
@@ -82,15 +84,17 @@
                 </tr><tr onmouseover="weblist_onmouseover(this);" onmouseout="weblist_onmouseout(this);">
                   {% endfor %}
                 </table>
+                <br>
                 <div class="pagefunction">
                   {% if currentpage > 1 %}
-                  <p align="center"><a href="/firstpage/1/" title="prevpage" align="center">上一頁</a></p>
+                  <h1 align="center" style="font-size:0.7cm;"><a href="/firstpage/1/" title="prevpage">上一頁</a></h1>
                   {% endif %}
-                    <br>
                   {% if currentpage < totalpage %}
-                  <p align="center"><a href="/firstpage/2/" title="nextpage" align="center">下一頁</a></p>
+                  <h1 align="center" style="font-size:0.7cm;"><a href="/firstpage/2/" title="nextpage">下一頁</a></h1>
                     {% endif %}
+
                   <p align="right"><a href="/post/"><input type="button" class="button" value="發文"/></a></p>
+
             </div>
           </div>
         </div>
