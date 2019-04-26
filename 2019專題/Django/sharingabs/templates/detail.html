@@ -19,23 +19,8 @@
         {% else %}
         <h5>如要刪文請聯絡管理員</h5>
         {% endif %}
-        <a href="/addcase/{{id.id}}/">add case</a>
-        {% if request.user.is_authenticated %}
-        <a href="/addcomment/{{id.id}}/">add comment</a>
-        {% endif %}
-    </div>
-    <h2>Comment<br>
-        {% for qq in comment %}
-        {% if qq.caseid == id.id %}
-        留言:{{qq.comment}}
-        留言者:{{qq.user}}
-        Like:{{qq.like}}
-        {% endif %}
-        {% endfor %}
         
-        <p align="right"><a href="/login/"><input type="button" class="button" value="登入"></a></p>
-         {% endif %}
-      </div>
+    </div>
       <div id="WRAPPER">
           <div id="SIDE">
                 <p><a href="/firstpage/3">回首頁</a></p>
@@ -43,6 +28,9 @@
                 <p><a href="/delete/{{id.id}}">刪除文章</a></p>
                 {% endif %}
                 <p>如要刪文請聯絡管理員</p>
+                {% if request.user.is_authenticated %}
+                <p><a href="/addcomment/{{id.id}}/">add comment</a></p>
+        {% endif %}
           </div>
           <div id="CONTENT">
                 <div class="BOX">
@@ -69,6 +57,14 @@
           </div>
         </div>
         <div id="FOOTER">
+            <h2>Comment<br>
+              {% for qq in comment %}
+              {% if qq.caseid == id.id %}
+              留言:{{qq.comment}}
+              留言者:{{qq.user}}
+              Like:{{qq.like}}
+              {% endif %}
+              {% endfor %}
             <h2></h2>
           </div>
 </body>
