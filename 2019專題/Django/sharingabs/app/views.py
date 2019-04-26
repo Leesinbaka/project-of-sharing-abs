@@ -5,7 +5,7 @@ from datetime import datetime
 import math
 from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render,redirect
-from app.models import mission
+from app.models import mission,comments
 #words = ["cat","dog","hello world"]#用來測試
 page1 = 1
 def firstpage(request,pageindex = None):
@@ -46,6 +46,7 @@ def firstpage(request,pageindex = None):
 
 def detail(request,detailid=None):
     id = mission.objects.get(id = detailid)
+    comment = comments.objects.order_by('-id')
     title = id.Mtitle
     post = id.Mpost
     name = id.Mname
@@ -95,12 +96,18 @@ from django.contrib import auth
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
+from app.models import usersave
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-
             user = form.save()
+            u = usersave()
+            u.username = request.POST.get('name')
+            u.address = request.POST.get('address')
+            u.position = request.POST.get('position')
+            u.userimage = request.FILES['pic']
+            u.save()
             return redirect('/firstpage/')
     else:
         form = UserCreationForm()
@@ -120,8 +127,7 @@ def login(request):
         else:
             message='failed'
     return render(request,"login.html",locals())
-def accountedit(request):
-    name = request.user.get_username()
+
 
 def logout(request):
     auth.logout(request)
@@ -153,3 +159,23 @@ def mypost(request):
     n = request.user.get_username()
     units = mission.objects.order_by('Mname')[:]
     return render(request,'mypost.html',locals())
+
+def userpage(request):
+    n = request.user.get_username()
+    u = usersave.objects.get(username = n)
+    name = u.username
+    pos = u.position
+    add = u.address
+    pic = u.userimage.url
+    return render(request,'userpage.html',locals())
+
+def addcomment(request,detailid=None):
+    if request.method == "POST":
+        c = comments()
+        c.caseid = detailid
+        c.comment = request.POST.get('comment')
+        c.user = request.user.get_username()
+        c.like = 0
+        c.save()
+        return redirect("/detail/"+detailid)
+    return render(request,"comment.html",locals())

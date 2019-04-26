@@ -17,6 +17,22 @@
         {% if request.user.is_authenticated %}
         <p align="right"><a href="/logout/"><input type="button" class="button" value="登出"></a></p>
         {% else %}
+        <h5>如要刪文請聯絡管理員</h5>
+        {% endif %}
+        <a href="/addcase/{{id.id}}/">add case</a>
+        {% if request.user.is_authenticated %}
+        <a href="/addcomment/{{id.id}}/">add comment</a>
+        {% endif %}
+    </div>
+    <h2>Comment<br>
+        {% for qq in comment %}
+        {% if qq.caseid == id.id %}
+        留言:{{qq.comment}}
+        留言者:{{qq.user}}
+        Like:{{qq.like}}
+        {% endif %}
+        {% endfor %}
+        
         <p align="right"><a href="/login/"><input type="button" class="button" value="登入"></a></p>
          {% endif %}
       </div>

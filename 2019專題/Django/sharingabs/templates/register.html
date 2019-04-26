@@ -3,9 +3,16 @@
 <title>Register</title>
 </head>
 <body>
-    <form action="" method="POST">
+    <h1>註冊新帳號</h1>
+    <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
+        id:{{ form.username }}<br>
+        password:{{ form.password1 }}<br>
+        password(再次輸入password for check):{{ form.password2 }}<br>
+        請輸入名字(請輸入跟id 一樣):<input type="text" name="name" required>
+        請輸入地址:<input type="text" name="address" required>
+        請輸入職位:<input type="text" name="position" required>
+        請輸入圖片:<input type="file" name="pic" id="pic">
         <input type="submit" value="register">
     </form>
 </body>
