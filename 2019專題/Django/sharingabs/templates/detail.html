@@ -67,6 +67,14 @@
               {% endfor %}
             <h2></h2>
           </div>
+          <h2>Comment<br>
+            {% for qq in comment %}
+            {% if qq.caseid == id.id %}
+            留言:{{qq.comment}}
+            留言者:{{qq.user}}
+            Like:{{qq.like}}
+            {% endif %}
+            {% endfor %}
 </body>
 {% endblock %}
 </html>
