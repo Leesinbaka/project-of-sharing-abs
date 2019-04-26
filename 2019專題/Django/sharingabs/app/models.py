@@ -24,12 +24,10 @@ class mission(models.Model):
         return self.Mtitle
 class userdata(models.Model):
     username = models.CharField(max_length=40,null=False)
-    address = models.CharField(max_length=100,null=False,default="no address here")
-    position = models.CharField(max_length=100,null=False,default="didnt write here")
     case = models.CharField(max_length=100,null=False,default="maybe something wrong here")
     casestatus = models.BooleanField(default=False)
     casetime = models.DateField(auto_now=True)
-    daysremind = models.IntegerField(null=False,default=0)
+    daysremain = models.IntegerField(null=False,default=0)
     caseid = models.IntegerField(default=0)
     image = models.ImageField(upload_to='imageforcase',default="haha")
     def __str__(self):
@@ -40,3 +38,17 @@ class userdata(models.Model):
 # Mrating
 # postime
 # count
+class comments(models.Model):
+    caseid = models.IntegerField(null=False)
+    comment = models.CharField(max_length=100)
+    user = models.CharField(max_length=40,null=False)
+    like = models.IntegerField(null=False,default=0)
+    def __str__(self):
+        return self.comment
+class usersave(models.Model):
+    username = models.CharField(max_length=40,null=False,default="no one !! wtf")
+    address = models.CharField(max_length=40,null=False)
+    position = models.CharField(max_length=40,null=False)
+    userimage = models.ImageField(upload_to='imageforuser',default="no image here")
+    def __str__(self):
+        return self.username
