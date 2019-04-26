@@ -24,18 +24,6 @@
         <a href="/addcomment/{{id.id}}/">add comment</a>
         {% endif %}
     </div>
-    <h2>Comment<br>
-        {% for qq in comment %}
-        {% if qq.caseid == id.id %}
-        留言:{{qq.comment}}
-        留言者:{{qq.user}}
-        Like:{{qq.like}}
-        {% endif %}
-        {% endfor %}
-        
-        <p align="right"><a href="/login/"><input type="button" class="button" value="登入"></a></p>
-         {% endif %}
-      </div>
       <div id="WRAPPER">
           <div id="SIDE">
                 <p><a href="/firstpage/3">回首頁</a></p>
@@ -67,6 +55,14 @@
         <div id="FOOTER">
             <h2></h2>
           </div>
+          <h2>Comment<br>
+            {% for qq in comment %}
+            {% if qq.caseid == id.id %}
+            留言:{{qq.comment}}
+            留言者:{{qq.user}}
+            Like:{{qq.like}}
+            {% endif %}
+            {% endfor %}
 </body>
 {% endblock %}
 </html>
