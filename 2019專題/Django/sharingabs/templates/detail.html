@@ -29,10 +29,7 @@
                 <p><a href="/firstpage/3">回首頁</a></p>
                 {% if user.is_superuser %}
                 <p><a href="/delete/{{id.id}}">刪除文章</a></p>
-                {% else %}
                 {% endif %}
-                <p><a href="/addcase/{{id.id}}/">加入我的任務列表</a></p>
-
                 <p>如要刪文請聯絡管理員</p>
           </div>
           <div id="CONTENT">
@@ -45,9 +42,16 @@
                 發文者:{{name}}<br>
                 有多少人願意參加:{{numofworker}}<br>
                 參加人名單:{{workername}}<br>
-                圖片:<br><img src="{{img}}" width="70%"></p>  
+                圖片:<br><img src="{{img}}" width="70%">
+
+                {% if request.user.is_authenticated %}
+                <p align="right" style="font-size:35px;"><a href="/addcase/{{id.id}}/">加入我的任務列表</a></p>
+                {% endif %}
+              
+              </p>  
                 </div>
 
+                
 
 
           </div>
