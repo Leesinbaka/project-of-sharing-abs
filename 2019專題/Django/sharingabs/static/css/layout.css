@@ -21,6 +21,42 @@ body {
 	background-image:url(images/center.jpg);
 	overflow:auto;
 }
+#WRAPPER2 {
+	margin:0 auto;
+	width:1460px;
+	padding:0 10px;
+	background-image:url(images/center2.jpg);
+	overflow:auto;
+}
+#CONTENT2 {
+	margin-left:200px;
+	margin-right:20px;
+	_height:1%;
+	padding-top:15px;
+	padding-bottom:25px;
+}
+#SIDE2 {
+	float:left;
+	margin: 1%;
+}
+#SIDE2 .BOX{
+	width: 200PX;
+	height: 240PX;
+	border-color: #8080C0;
+	border-style: solid;
+	margin-left: 30px;
+}
+#SIDE3 {
+	float: left;
+    border-style: solid;
+    margin: 1%;
+    width: 1000px;
+	height: 240px;
+    /* padding-top: 15px; */
+    margin-top: 22.5px;
+	margin-left: -17px;
+	border-color: #8080C0;
+}
 #CONTENT {
 	margin-left:300px;
 	margin-right:20px;
