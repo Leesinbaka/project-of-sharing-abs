@@ -178,3 +178,10 @@ def userpage(request):
     add = u.address
     pic = u.userimage.url
     return render(request,'userpage.html',locals())
+
+def like(request,commentid=None,detailid=None):
+    if commentid != None:
+        c = comments.objects.get(id = commentid)
+        c.like += 1
+        c.save()
+    return redirect("/detail/"+detailid)
