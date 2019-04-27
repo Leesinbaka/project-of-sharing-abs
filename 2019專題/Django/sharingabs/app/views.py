@@ -59,6 +59,16 @@ def detail(request,detailid=None):
     count = id.count
     id.count += 1
     id.save()
+    if request.method == "POST":
+        c = comments()
+        c.user = request.user.get_username()
+        u = usersave.objects.get(username = c.user)
+        userimg = u.userimage.url
+        c.caseid = detailid
+        c.usericon = userimg
+        c.comment = request.POST.get('comment')
+        c.like = 0
+        c.save()
     return render(request,"detail.html",locals())
 
 def post(request):
@@ -168,14 +178,3 @@ def userpage(request):
     add = u.address
     pic = u.userimage.url
     return render(request,'userpage.html',locals())
-
-def addcomment(request,detailid=None):
-    if request.method == "POST":
-        c = comments()
-        c.caseid = detailid
-        c.comment = request.POST.get('comment')
-        c.user = request.user.get_username()
-        c.like = 0
-        c.save()
-        return redirect("/detail/"+detailid)
-    return render(request,"comment.html",locals())
