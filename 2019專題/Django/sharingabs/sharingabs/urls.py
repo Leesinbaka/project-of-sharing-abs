@@ -37,4 +37,5 @@ urlpatterns = [
     path('logout/',views.logout),
     url(r'^addcase/(\d+)/$',views.addcase),
     path('userpage/',views.userpage),
+    url(r'^userpage/(\d+)/$',views.userpage),
 ]   + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # we need to add this to make those image visible

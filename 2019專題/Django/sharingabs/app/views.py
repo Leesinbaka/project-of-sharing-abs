@@ -63,6 +63,7 @@ def detail(request,detailid=None):
         c = comments()
         c.user = request.user.get_username()
         u = usersave.objects.get(username = c.user)
+        c.uid = u.id
         userimg = u.userimage.url
         c.caseid = detailid
         c.usericon = userimg
@@ -170,13 +171,21 @@ def mypost(request):
     units = mission.objects.order_by('Mname')[:]
     return render(request,'mypost.html',locals())
 
-def userpage(request):
-    n = request.user.get_username()
-    u = usersave.objects.get(username = n)
-    name = u.username
-    pos = u.position
-    add = u.address
-    pic = u.userimage.url
+def userpage(request,userid=None):
+    if userid == None:
+        n = request.user.get_username()
+        u = usersave.objects.get(username = n)
+        name = u.username
+        pos = u.position
+        add = u.address
+        pic = u.userimage.url
+    else:
+        uid = userid
+        u = usersave.objects.get(id = userid)
+        name = u.username
+        pos = u.position
+        add = u.address
+        pic = u.userimage.url
     return render(request,'userpage.html',locals())
 
 def like(request,commentid=None,detailid=None):

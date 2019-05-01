@@ -43,6 +43,7 @@ class comments(models.Model):
     usericon = models.CharField(max_length=400,null=False,default='something worng here')
     comment = models.CharField(max_length=100)
     user = models.CharField(max_length=40,null=False)
+    uid = models.IntegerField(null=False,default=1)
     like = models.IntegerField(null=False,default=0)
     def __str__(self):
         return self.comment
