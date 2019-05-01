@@ -11,6 +11,45 @@
 <link rel="stylesheet" href="{% static 'css/reset.css' %}">
 <!-- <img src="/static/images/titleicon.jpg" width="1200" height="500" alt="" style="display:block; margin:auto;"/> -->
 </head>
+<style type="text/css">
+  table.hovertable {
+    font-size:30px;
+    color:#000;
+    border-width: 1px;
+    border-color: #999999;
+    border-collapse: collapse;
+  }
+  table.hovertable a{
+    font-size:30px;
+    color:#000;
+    display: block;
+    text-align:center;
+  }
+  table.hovertable th {
+    background-color:#ffffff;
+    border-width: 5px;
+    padding: 10px;
+    border-style: solid;
+    border-color: #a3ddf8c9;
+  }
+  table.hovertable tr {
+    background-color:#ffffff;
+  }
+  table.hovertable td {
+    border-width: 5px;
+    padding: 15px;
+    border-style: solid;
+    border-color: #a3ddf8c9;
+  }
+    </style>
+  <script>
+    function weblist_onmouseover(obj){
+    obj.style.backgroundColor='#fcf4a1';
+    }
+    function weblist_onmouseout(obj){
+    obj.style.backgroundColor='#ffffff';
+    }
+    </script>
 <body>
     <div id="HEADER">
         {% if request.user.is_authenticated %}
@@ -18,7 +57,7 @@
         {% else %}
         <h5>如要刪文請聯絡管理員</h5>
         {% endif %}
-        
+
     </div>
       <div id="WRAPPER">
           <div id="SIDE">
@@ -49,36 +88,50 @@
         </div>
 
       </div>
-      <div id="WRAPPER2">
-        <div id="SIDE2">
-            <h2 style="font-size: 1.3cm;	margin-left: 30px; margin-right: 20PX; border-color: #8080C0;; border-style: solid;width: 20; ">留言區:</h2>
-            <div class="BOX">
-                {% for qq in comment %}
-                {% if qq.caseid == id.id %}
-                <p style="margin-right:30px ; margin-left: 30px;  ;height:200px ;"><img src="{{pic}}"></p>
-                <p><a href="/userpage/{{qq.uid}}">用戶名稱:{{qq.user}}</a></p>
+    <div id="WRAPPER">
+        <div id="CONTENT">
+            <table class="hovertable" width="99%">
+                <tr>
+                  <th style="width: 280px; ">留言區</th>
+                  <th><form action="" method="POST" enctype="multipart/form-data" style="margin-left: 100px;">
+                    {% csrf_token %} 
+                    在些輸入你想說的:
+                    <input type="text"name="comment"id="comment" style="height: 21px;  width: 300px;">
+                    <input type="submit"value="comment">
+                 </form></th>
+                </tr>
+            </table>
+            {% for qq in comment %}
+            {% if qq.caseid == id.id %}
+            <table class="hovertable" width="100%">
+              <tr onmouseover="weblist_onmouseover(this);" onmouseout="weblist_onmouseout(this);">
+
+                <td style="width: 270px;">
+                  <center><img src="{{qq.usericon}}" style="height:200px;"></center>
+                  <br><a href="/userpage/{{qq.uid}}">用戶名稱:{{qq.user}}</a></td>
+
+                <td >留言:{{qq.comment}}<br><br><br><br><br><br><br>Like:{{qq.like}}</td>
+
+              </tr><tr onmouseover="weblist_onmouseover(this);" onmouseout="weblist_onmouseout(this);">
                 
-            </div>
-        </div>
-        <div id="CONTENT2"></div>
-        <br>
-        <div id="SIDE3">
-
-          <br>
-            
-            留言:<br>{{qq.comment}}
-            Like:{{qq.like}}
-              <p>123</p>
-
-            {% endif %}
+              </table>
+              {% endif %}
             {% endfor %}
-      </div>
-    </div>
+ 
 
+    </div>
+  </div>
+
+
+
+        </div>
 
         <div id="FOOTER">
 
         </div>
+
+
+         
             <h2>Comment</h2>
             <br>
               {% for qq in comment %}
