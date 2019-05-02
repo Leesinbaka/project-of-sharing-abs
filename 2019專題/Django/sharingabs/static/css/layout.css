@@ -7,8 +7,8 @@ body {
 }
 #HEADER {
 	margin:0 auto;
-	width:90%;
-	height:30%;
+	widows: 1480px;
+	height:150px;
 	background-image:url(images/top.jpg);
 }
 #HEADER h1 {

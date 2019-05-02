@@ -1,19 +1,46 @@
+{% load staticfiles %}
 <html>
-<head>
-<title>Register</title>
-</head>
-<body>
-    <h1>註冊新帳號</h1>
-    <form action="" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        id:{{ form.username }}<br>
-        password:{{ form.password1 }}<br>
-        password(再次輸入password for check):{{ form.password2 }}<br>
-        請輸入名字(請輸入跟id 一樣):<input type="text" name="name" required>
-        請輸入地址:<input type="text" name="address" required>
-        請輸入職位:<input type="text" name="position" required>
-        請輸入圖片:<input type="file" name="pic" id="pic">
-        <input type="submit" value="register">
-    </form>
-</body>
+        <head>
+                <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+                <meta name="author" content="Flycan.com" />
+                <title>註冊新帳號</title>
+                <link rel="stylesheet" href="{% static 'css/button.css' %}">
+                <link rel="stylesheet" href="{% static 'css/layout.css' %}">
+                <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+                <!-- <img src="/static/images/titleicon.jpg" width="1200" height="500" alt="" style="display:block; margin:auto;"/> -->
+                </head>
+        <body>
+                <div id="HEADER">
+                      
+                  </div>
+            
+                  <div id="WRAPPER">
+                        <div id="SIDE">  
+                        <p><a href="/firstpage/3">回首頁</a></p>
+                        </div>
+                      <div id="CONTENT">
+                          <h1 style="margin: 150px;margin-left: 200PX;margin-top: 200px;">
+                                <form action="" method="POST" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    帳號:{{ form.username }}<br>
+                                    密碼:{{ form.password1 }}<br>
+                                    再次輸入密碼(再次輸入同上一樣的密碼):{{ form.password2 }}<br>
+                                    請輸入名字(請輸入跟帳號一樣):<input type="text" name="name" required style="width:200px; height:25px;"><br>
+                                    請輸入地址:<input type="text" name="address" required style="width:200px; height:25px;"><br>
+                                    請輸入職位:<input type="text" name="position" required style="width:200px; height:25px;"><br>
+                                    請輸入圖片:<input type="file" name="pic" id="pic" style="width:200px; height:25px;"><br>
+                                    <input type="submit" value="register" style="width:75px; height:50px; font-size:20px ">
+                                </form>
+                            </h1>
+                      </div>
+                      <div id="CONTENT">
+                      </div>
+                      <div id="CONTENT">
+                          <br> <br>
+                        </div>
+                  </div>
+                    <div id="FOOTER">
+                      </div>
+            </body>
 </html>
+
