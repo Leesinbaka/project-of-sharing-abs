@@ -95,9 +95,11 @@
                   <th style="width: 280px; ">留言區</th>
                   <th><form action="" method="POST" enctype="multipart/form-data" style="margin-left: 100px;">
                     {% csrf_token %} 
+                    {% if request.user.is_authenticated %}
                     在些輸入你想說的:
                     <input type="text"name="comment"id="comment" style="height: 21px;  width: 300px;">
                     <input type="submit"value="comment">
+                    {% endif %}
                  </form></th>
                 </tr>
             </table>
@@ -107,11 +109,9 @@
               <tr onmouseover="weblist_onmouseover(this);" onmouseout="weblist_onmouseout(this);">
                 <td style="width: 270px;">
                   <center><img src="{{qq.usericon}}" style="height:200px;"></center>
-                  <br> 用戶名稱:{{qq.user}}</td>
+                  <br><a href="/userpage/{{qq.uid}}">用戶名稱:{{qq.user}}</a> </td>
                 <td style="word-break: break-all;">留言:{{qq.comment}}<br><br><br><br><br><br><br>Like:{{qq.like}}</td>
-                  <br><a href="/userpage/{{qq.uid}}">用戶名稱:{{qq.user}}</a></td>
-
-                <td >留言:{{qq.comment}}<br><br><br><br><br><br><br>Like:{{qq.like}}</td>
+ 
 
               </tr><tr onmouseover="weblist_onmouseover(this);" onmouseout="weblist_onmouseout(this);">
                 
