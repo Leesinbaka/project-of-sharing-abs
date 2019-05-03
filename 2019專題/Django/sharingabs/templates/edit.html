@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+{% load staticfiles %}
+{% block content %}
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="author" content="Flycan.com" />
+<title>更改文章</title>
+<link rel="stylesheet" href="{% static 'css/button.css' %}">
+<link rel="stylesheet" href="{% static 'css/layout.css' %}">
+<link rel="stylesheet" href="{% static 'css/reset.css' %}">
+<!-- <img src="/static/images/titleicon.jpg" width="1200" height="500" alt="" style="display:block; margin:auto;"/> -->
+</head>
+
+<body>
+    <div id="HEADER">
+      </div>
+
+      <div id="WRAPPER">  
+          <div id="CONTENT">
+                <form action="/edit/{{e.id}}/edit/" method ="POST" name="form2" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <h2>
+                        請輸入任務題目:<input type="text" name="title" value="{{e.Mtitle}}"><br>
+                        請輸入任務內容:<input type="textarea" name="post"value="{{e.Mpost}}"><br>
+                        Deadline:<input type="date"name="deadline"value="{{e.deadline}}"><br>
+                        Money:<input type="number"name="money"value="{{e.money}}"><br>
+                        Status:<input type="checkbox"name="status"value="{{e.status}}"><br>
+                        Rating:<input type="radio" name="rating" value="1"checked="checked">
+                        <input type="radio" name="rating" value="2">
+                        <input type="radio" name="rating" value="3">
+                        <input type="radio" name="rating" value="4">
+                        <input type="radio" name="rating" value="5"><br>
+                        請輸入圖片:<input type="file" name="picture" id="picture" placeholder="Image"required><br>
+                        <h4>名字: {{user.username}}</h4>
+                        <input type="submit" name="comfirm">
+                    </h2>
+                    <div>{{mess}}</div>
+                    </form>
+          </div>
+      </div>
+
+        <div id="FOOTER">
+          </div>
+
+</body>
+{% endblock %}
+</html>

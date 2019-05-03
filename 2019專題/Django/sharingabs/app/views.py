@@ -57,6 +57,7 @@ def detail(request,detailid=None):
     status = id.status
     img = id.Mimage.url
     count = id.count
+    money = id.money
     id.count += 1
     id.save()
     if request.method == "POST":
@@ -194,3 +195,33 @@ def like(request,commentid=None,detailid=None):
         c.like += 1
         c.save()
     return redirect("/detail/"+detailid)
+
+def edit(request,detailid = None,mode=None):
+    e = mission.objects.get(id = detailid)
+    if mode == 'edit':
+        e = mission.objects.get(id = detailid)
+        title = request.POST['title']
+        post = request.POST['post']
+        name = request.user.get_username()
+        dline = request.POST['deadline']
+        money = request.POST['money']
+        image = request.FILES['picture']#image here
+        rating = request.POST['rating']
+        status1 = request.POST.get('status', '') == 'on'
+        e.Mtitle = title
+        e.Mpost = post
+        e.Mname = name
+        e.deadline = dline 
+        e.money = money
+        e.Mimage = image
+        if status1 == None:
+            status1 = False
+        else:
+            status1 = True
+        e.status = status1
+        e.Mrating = rating
+        e.save()
+        return redirect('/detail/'+detailid)
+    else:
+        e = mission.objects.get(id = detailid)
+    return render(request,"edit.html",locals())

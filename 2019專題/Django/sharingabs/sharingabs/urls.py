@@ -38,4 +38,6 @@ urlpatterns = [
     url(r'^addcase/(\d+)/$',views.addcase),
     path('userpage/',views.userpage),
     url(r'^userpage/(\d+)/$',views.userpage),
+    url(r'^edit/(\d+)/$',views.edit),
+    url(r'^edit/(\d+)/(\w+)/$',views.edit),
 ]   + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # we need to add this to make those image visible
