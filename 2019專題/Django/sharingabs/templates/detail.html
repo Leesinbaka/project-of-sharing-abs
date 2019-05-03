@@ -62,6 +62,7 @@
           <div id="SIDE">
                 <p><a href="/firstpage/3">回首頁</a></p>
                 {% if user.is_superuser %}
+                <p><a href="/edit/{{id.id}}">更改文章</a></p>
                 <p><a href="/delete/{{id.id}}">刪除文章</a></p>
                 {% endif %}
                 <p>如要刪文請聯絡管理員</p>
@@ -75,6 +76,7 @@
                 發文日期:{{postime}}<br>
                 點擊次數:{{count}}<br>
                 發文者:{{name}}<br>
+                報酬:{{money}}<br>
                 有多少人願意參加:{{numofworker}}<br>
                 參加人名單:{{workername}}<br>
                 圖片:<br><img src="{{img}}" width="70%">
