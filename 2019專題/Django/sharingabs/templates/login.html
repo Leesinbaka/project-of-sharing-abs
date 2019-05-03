@@ -1,20 +1,46 @@
 {% load staticfiles %}
 <html>
-    <head>
-        <title>login page</title>
-        
-    </head>
-    <body>
-        <form action="." method="POST" name="form1">
-            {% csrf_token %}
-            account:<input type="text" name="username" id="username"/>
-            password:<input type="password" name="password" id="password"/>
-            <input type="submit" name="button" id="button" value="login"/>
-            {{message}}
-        </form>
-        <a href="/register/"><input type="submit" name="button" id="button" value="signup"/></a>
-    </body>
+        <head>
+                <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+                <meta name="author" content="Flycan.com" />
+                <title>登入</title>
+                <link rel="stylesheet" href="{% static 'css/button.css' %}">
+                <link rel="stylesheet" href="{% static 'css/layout.css' %}">
+                <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+                <!-- <img src="/static/images/titleicon.jpg" width="1200" height="500" alt="" style="display:block; margin:auto;"/> -->
+                </head>
+        <body>
+                <div id="HEADER">
+                      
+                  </div>
+            
+                  <div id="WRAPPER">
+                        <div id="SIDE">  
+                        <p><a href="/firstpage/3">回首頁</a></p>
+                        </div>
+                      <div id="CONTENT">
+                          <h1 style="margin: 150px;margin-left: 450PX;margin-top: 250px;">
+                            <form action="." method="POST" name="form1">
+                                    {% csrf_token %}
+                                    account:<input type="text" name="username" id="username" style="width:150px; height:30px;"/><br>
+                                    password:<input type="password" name="password" id="password" style="width:150px; height:30px;"/>
+                                    <input type="submit" name="button" id="button" value="登入" style="width:75px; height:50px; font-size:20px "/>
+                                    {{message}}  
+                                </form>     
+                                <a href="/register/"><input type="submit" name="button" id="button" value="註冊" style="width:75px; height:50px;font-size:20px"/></a> 
+                            </h1>
+                      </div>
+                      <div id="CONTENT">
+                      </div>
+                      <div id="CONTENT">
+                          <br> <br>
+                        </div>
+                  </div>
+                    <div id="FOOTER">
+                      </div>
+            </body>
 </html>
+
 
 
 

@@ -55,7 +55,6 @@
         {% if request.user.is_authenticated %}
         <p align="right"><a href="/logout/"><input type="button" class="button" value="登出"></a></p>
         {% else %}
-        <h5>如要刪文請聯絡管理員</h5>
         {% endif %}
 
     </div>
@@ -97,9 +96,11 @@
                   <th style="width: 280px; ">留言區</th>
                   <th><form action="" method="POST" enctype="multipart/form-data" style="margin-left: 100px;">
                     {% csrf_token %} 
+                    {% if request.user.is_authenticated %}
                     在些輸入你想說的:
                     <input type="text"name="comment"id="comment" style="height: 21px;  width: 300px;">
                     <input type="submit"value="comment">
+                    {% endif %}
                  </form></th>
                 </tr>
             </table>
@@ -107,12 +108,11 @@
             {% if qq.caseid == id.id %}
             <table class="hovertable" width="100%">
               <tr onmouseover="weblist_onmouseover(this);" onmouseout="weblist_onmouseout(this);">
-
                 <td style="width: 270px;">
                   <center><img src="{{qq.usericon}}" style="height:200px;"></center>
-                  <br><a href="/userpage/{{qq.uid}}">用戶名稱:{{qq.user}}</a></td>
-
-                <td >留言:{{qq.comment}}<br><br><br><br><br><br><br>Like:{{qq.like}}</td>
+                  <br><a href="/userpage/{{qq.uid}}">用戶名稱:{{qq.user}}</a> </td>
+                <td style="word-break: break-all;">留言:{{qq.comment}}<br><br><br><br><br><br><br>Like:{{qq.like}}</td>
+ 
 
               </tr><tr onmouseover="weblist_onmouseover(this);" onmouseout="weblist_onmouseout(this);">
                 
@@ -123,34 +123,9 @@
 
     </div>
   </div>
-
-
-
-        </div>
-
+  </div>
         <div id="FOOTER">
-
         </div>
-
-
-         
-            <h2>Comment</h2>
-            <br>
-              {% for qq in comment %}
-              {% if qq.caseid == id.id %}
-              圖片:<br><img src="{{qq.usericon}}" width="7%">
-              留言:{{qq.comment}}
-              <p><a href="/userpage/{{qq.uid}}">用戶名稱:{{qq.user}}</a></p>
-              Like:{{qq.like}}
-              <a href="/like/{{qq.id}}/{{id.id}}">like</a>
-              {% endif %}
-              {% endfor %}
-          </div>
-        <form action="" method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            <input type="text"name="comment"id="comment">
-            <input type="submit"value="comment">
-        </form>
 </body>
 {% endblock %}
 </html>

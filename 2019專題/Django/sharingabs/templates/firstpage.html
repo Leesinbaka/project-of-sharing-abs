@@ -65,7 +65,7 @@
               {% if request.user.is_authenticated %}
             <p><a href="/mycase/">我接受的任務</a></p>
             <p><a href="/mypost/">我發放的文章</a></p>
-            <p><a href="/userpage/">我的profile</a></p>
+            <p><a href="/userpage/">我的個人資料</a></p>
             {% endif %}
           </div>
           <div id="CONTENT">
@@ -77,10 +77,10 @@
                 </tr>
                 {% for m in units %}
                 <tr onmouseover="weblist_onmouseover(this);" onmouseout="weblist_onmouseout(this);">
-                  <td><a href="/detail/{{m.id}}/" title="">{{ m.Mtitle }}</a></td>
-                  <td><center>{{ m.Mname }}</center></td>
-                  <td><center>{{ m.postime }}</center></td>
-                  <td>{{ m.count }}</td>
+                  <td  style="word-break: break-all;"><a href="/detail/{{m.id}}/" title="">{{ m.Mtitle }}</a></td>
+                  <td  style="word-break: break-all;"><center>{{ m.Mname }}</center></td>
+                  <td  style="word-break: break-all;" ><center>{{ m.postime }}</center></td>
+                  <td  style="word-break: break-all;">{{ m.count }}</td>
                 </tr><tr onmouseover="weblist_onmouseover(this);" onmouseout="weblist_onmouseout(this);">
                   {% endfor %}
                 </table>
