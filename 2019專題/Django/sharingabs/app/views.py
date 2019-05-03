@@ -194,3 +194,6 @@ def like(request,commentid=None,detailid=None):
         c.like += 1
         c.save()
     return redirect("/detail/"+detailid)
+
+def game(request):
+    return render(request,"gamepage.html",locals())
