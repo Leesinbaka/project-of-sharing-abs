@@ -7,7 +7,7 @@ body {
 }
 #HEADER {
 	margin:0 auto;
-	widows: 1480px;
+	width: 1480px;
 	height:150px;
 	background-image:url(images/top.jpg);
 }
