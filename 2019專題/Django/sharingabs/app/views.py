@@ -199,6 +199,8 @@ def like(request,commentid=None,detailid=None):
         c.save()
     return redirect("/detail/"+detailid)
 
+def game(request):
+    return render(request,"gamepage.html",locals())
 def edit(request,detailid = None,mode=None):
     e = mission.objects.get(id = detailid)
     if mode == 'edit':
@@ -236,3 +238,4 @@ def delcomment(request,commentid=None,detailid=None):
         c = comments.objects.get(id = commentid)
         c.delete()
     return redirect('/detail/'+detailid)
+
