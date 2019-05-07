@@ -52,6 +52,13 @@ def detail(request,detailid=None):
     post = id.Mpost
     name = id.Mname
     postime = id.postime
+    now = datetime.now()
+    if now.month == postime.month:
+        timeremain = now.day - postime.day
+    elif now.month > postime.month:
+        timeremain = (now.day+30) - postime.day
+    elif now.month < postime.month:
+        timeremain = (postime.day+30) - now.day
     rating = id.Mrating
     numofworker = id.numofworker
     workername = id.nameofaccept
