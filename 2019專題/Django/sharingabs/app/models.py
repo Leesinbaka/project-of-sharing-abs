@@ -1,5 +1,5 @@
 from django.db import models
-
+from django_google_maps import fields as map_fields
 # Create your models here.
 class mission(models.Model):
     Mtitle = models.CharField(max_length=40,null=False,default="no title") #connect case
@@ -16,20 +16,22 @@ class mission(models.Model):
     count = models.IntegerField(default=0)
     money = models.IntegerField(default=0)
     numofworker = models.IntegerField(default=0)
-    Mimage = models.ImageField(upload_to='imageformission',default="haha")
-    status = models.BooleanField(null=False,default=False) #connect casestatus
+    Mimage = models.ImageField(upload_to='imageformission',default="haha.png")
+    Mvideo = models.FileField(upload_to='imageformission',default="haha.png",blank=True)
+    status = models.CharField(max_length=20,null=False,default="可") #connect casestatus
     deadline = models.DateField(auto_now=True) #connect casetime
     nameofaccept = models.CharField(max_length=400)
+    address = models.CharField(max_length=100,default="some error here")
     def __str__(self):
         return self.Mtitle
 class userdata(models.Model):
     username = models.CharField(max_length=40,null=False)
     case = models.CharField(max_length=100,null=False,default="maybe something wrong here")
-    casestatus = models.BooleanField(default=False)
+    casestatus = models.CharField(max_length=20,default=False)
     casetime = models.DateField(auto_now=True)
     daysremain = models.IntegerField(null=False,default=0)
     caseid = models.IntegerField(default=0)
-    image = models.ImageField(upload_to='imageforcase',default="haha")
+    image = models.ImageField(upload_to='imageforcase',default="haha.png")
     def __str__(self):
         return self.username
 # Mtitle

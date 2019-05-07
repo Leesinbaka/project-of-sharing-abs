@@ -28,6 +28,7 @@ urlpatterns = [
     path('mycase/',views.case),
     path('mypost/',views.mypost),
     url(r'^like/(\d+)/(\d+)/$',views.like),
+    url(r'^delcomment/(\d+)/(\d+)/$',views.delcomment),
 
     path('post/',views.post),
     url(r'^delete/(\d+)/$',views.delpost),

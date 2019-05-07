@@ -69,11 +69,12 @@
             {% endif %}
           </div>
           <div id="CONTENT">
-              <marquee direction="down"><h5  align="center" valign="center" style="font-size:1.8cm;">任務列表</h5> </marquee>
+              <marquee direction="down"class="gg3p0"><h5 align="center" valign="center" style="font-size:1.8cm;" >任務列表</h5> </marquee>
             <h3 align="right" valign="right"> 現時時間: {{now}}</h3>
               <table class="hovertable" width="99%">
                 <tr>
-                  <th width="100">標題</th><th width="150">發文者</th><th width="90">發文時間</th><th width="50">點撃數</th>
+                  <th width="30%">標題</th><th width="10%">發文者</th><th width="30%">發文時間</th><th width="10%">點撃數</th>
+                  <th width="15%">是否開放</th>
                 </tr>
                 {% for m in units %}
                 <tr onmouseover="weblist_onmouseover(this);" onmouseout="weblist_onmouseout(this);">
@@ -81,6 +82,7 @@
                   <td  style="word-break: break-all;"><center>{{ m.Mname }}</center></td>
                   <td  style="word-break: break-all;" ><center>{{ m.postime }}</center></td>
                   <td  style="word-break: break-all;">{{ m.count }}</td>
+                  <td  style="word-break: break-all;"><center>{{ m.status }}</center></td>
                 </tr><tr onmouseover="weblist_onmouseover(this);" onmouseout="weblist_onmouseout(this);">
                   {% endfor %}
                 </table>

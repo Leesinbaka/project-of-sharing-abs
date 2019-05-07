@@ -45,6 +45,7 @@ def firstpage(request,pageindex = None):
     return render(request,"firstpage.html",locals())
 
 def detail(request,detailid=None):
+    user = request.user.get_username()
     id = mission.objects.get(id = detailid)
     comment = comments.objects.order_by('-id')
     title = id.Mtitle
@@ -56,6 +57,7 @@ def detail(request,detailid=None):
     workername = id.nameofaccept
     status = id.status
     img = id.Mimage.url
+    vid = id.Mvideo.url
     count = id.count
     money = id.money
     id.count += 1
@@ -83,11 +85,12 @@ def post(request):
             m.deadline = request.POST.get('deadline')
             m.money = request.POST.get('money')
             m.Mimage = request.FILES['picture']#image here
-            status1 = request.POST.get('status', '') == 'on'
+            m.Mvideo = request.FILES['video']
+            status1 = request.POST.get('status')
             if status1 == None:
-                status1 = False
+                status1 = "未完成"
             else:
-                status1 = True
+                status1 = "完成"
             m.status = status1
             m.Mrating = request.POST['rating']
             m.save()
@@ -206,18 +209,20 @@ def edit(request,detailid = None,mode=None):
         dline = request.POST['deadline']
         money = request.POST['money']
         image = request.FILES['picture']#image here
+        video = request.FILES['video']
         rating = request.POST['rating']
-        status1 = request.POST.get('status', '') == 'on'
+        status1 = request.POST.get('status')
         e.Mtitle = title
         e.Mpost = post
         e.Mname = name
         e.deadline = dline 
         e.money = money
         e.Mimage = image
+        e.Mvideo = video
         if status1 == None:
-            status1 = False
+            status1 = "未完成"
         else:
-            status1 = True
+            status1 = "完成"
         e.status = status1
         e.Mrating = rating
         e.save()
@@ -225,3 +230,9 @@ def edit(request,detailid = None,mode=None):
     else:
         e = mission.objects.get(id = detailid)
     return render(request,"edit.html",locals())
+
+def delcomment(request,commentid=None,detailid=None):
+    if commentid != None:
+        c = comments.objects.get(id = commentid)
+        c.delete()
+    return redirect('/detail/'+detailid)
