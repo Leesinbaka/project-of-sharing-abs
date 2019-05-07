@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+{% if request.user.is_authenticated %}
+{% load staticfiles %}
+{% block content %}
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="author" content="Flycan.com" />
+<title>發佈廣告</title>
+<link rel="stylesheet" href="{% static 'css/button.css' %}">
+<link rel="stylesheet" href="{% static 'css/layout.css' %}">
+<link rel="stylesheet" href="{% static 'css/reset.css' %}">
+<!-- <img src="/static/images/titleicon.jpg" width="1200" height="500" alt="" style="display:block; margin:auto;"/> -->
+</head>
+
+<body>
+    <div id="HEADER">
+      </div>
+
+      <div id="WRAPPER">  
+          <div id="CONTENT">
+                <form action="/ads/ads/" method ="POST" name="form1" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <h2>
+                        <h4>名字:{{user.username}}</h4>
+                        請輸入廣告題目:<input type="text" name="title" required><br>
+                        請輸入廣告內容:<input type="textarea" name="content"required><br>
+                        請輸入圖片:<input type="file" name="picture" id="picture" placeholder="Image"required><br>
+                        請輸入影片:<input type="file" name="video" id="video" placeholder="video"><br>
+                        <input type="submit" name="comfirm">
+                    </h2>
+                    <div>{{mess}}</div>
+                    </form>
+          </div>
+      </div>
+
+        <div id="FOOTER">
+          </div>
+
+</body>
+{% endblock %}
+</html>
+{% else %}
+<html>
+        <head>
+                <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+                <meta name="author" content="Flycan.com" />
+                <title>未登入</title>
+                <link rel="stylesheet" href="{% static 'css/button.css' %}">
+                <link rel="stylesheet" href="{% static 'css/layout.css' %}">
+                <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+                <!-- <img src="/static/images/titleicon.jpg" width="1200" height="500" alt="" style="display:block; margin:auto;"/> -->
+                </head>
+        <body>
+                <div id="HEADER">
+                  </div>
+            
+                  <div id="WRAPPER">  
+                      <div id="CONTENT">
+                            <h1 style="margin: 150px;margin-left: 500PX;margin-top: 250px;">未登入,請先登入!!<br>
+                            <a href="/login/"><input type="button" class="button" value="login" /></a></h1>
+                      </div>
+                      <div id="CONTENT">
+                      </div>
+                      <div id="CONTENT">
+                          <br> <br>
+                        </div>
+                  </div>
+                    <div id="FOOTER">
+                      </div>
+            </body>
+{% endif %}
+</html>

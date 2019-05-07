@@ -52,13 +52,21 @@ def detail(request,detailid=None):
     post = id.Mpost
     name = id.Mname
     postime = id.postime
+    deadline = id.deadline
     now = datetime.now()
-    if now.month == postime.month:
-        timeremain = now.day - postime.day
-    elif now.month > postime.month:
-        timeremain = (now.day+30) - postime.day
-    elif now.month < postime.month:
-        timeremain = (postime.day+30) - now.day
+    if now.month == deadline.month:
+        timeremain = now.day - deadline.day
+    elif now.month > deadline.month:
+        timeremain = (now.day+30) - deadline.day
+    elif now.month < deadline.month:
+        timeremain = (deadline.day+30) - now.day
+    qq=timeremain
+    if qq>=0:
+        message = "任務過去了"+str(qq)+"天"
+    elif qq<0:
+        x = (qq-qq-qq)
+        message = "任務還有"+str(x)+"天"
+    
     rating = id.Mrating
     numofworker = id.numofworker
     workername = id.nameofaccept
@@ -245,4 +253,24 @@ def delcomment(request,commentid=None,detailid=None):
         c = comments.objects.get(id = commentid)
         c.delete()
     return redirect('/detail/'+detailid)
+
+from app.models import ads
+
+def postads(request,index=None):
+    if index == "ads":
+        if request.user.is_authenticated:
+            title = request.POST.get('title')
+            content = request.POST.get('content')
+            username = request.user.get_username()
+            image = request.FILES['picture']#image here
+            video = request.FILES['video']
+            ads.objects.create(title=title,content=content,username=username,image=image,video=video)
+            mess ="input succeeded"
+            return redirect('/firstpage/')
+    return render(request,"ads.html",locals())
+
+def myads(request,username=None):
+    a = ads.objects.get(username = username)
+
+    return render(request,"myads.html",locals())
 

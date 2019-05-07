@@ -42,4 +42,8 @@ urlpatterns = [
     path('gamepage/',views.game),
     url(r'^edit/(\d+)/$',views.edit),
     url(r'^edit/(\d+)/(\w+)/$',views.edit),
+    path('ads/',views.postads),
+    url(r'ads/(\w+)/$',views.postads),
+
+
 ]   + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # we need to add this to make those image visible
