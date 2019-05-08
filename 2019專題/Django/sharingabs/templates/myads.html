@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+{% load staticfiles %}
+{% block content %}
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="author" content="Flycan.com" />
+<title>接佈的廣告</title>
+<link rel="stylesheet" href="{% static 'css/button.css' %}">
+<link rel="stylesheet" href="{% static 'css/layout.css' %}">
+<link rel="stylesheet" href="{% static 'css/reset.css' %}">
+<!-- <img src="/static/images/titleicon.jpg" width="1200" height="500" alt="" style="display:block; margin:auto;"/> -->
+</head>
+<style type="text/css">
+  table.hovertable {
+    font-size:30px;
+    color:#000;
+    border-width: 1px;
+    border-color: #999999;
+    border-collapse: collapse;
+  }
+  table.hovertable a{
+    font-size:30px;
+    color:#000;
+    display: block;
+    text-align:center;
+  }
+  table.hovertable th {
+    background-color:#ffffff;
+    border-width: 5px;
+    padding: 10px;
+    border-style: solid;
+    border-color: #c9a9c9;
+  }
+  table.hovertable tr {
+    background-color:#ffffff;
+  }
+  table.hovertable td {
+    border-width: 5px;
+    padding: 15px;
+    border-style: solid;
+    border-color:#c9a9c9;
+  }
+    </style>
+
+
+<body>
+    <div id="HEADER">
+        {% if request.user.is_authenticated %}
+        <p align="right"><a href="/logout/"><input type="button" class="button" value="登出"></a></p>
+        {% else %}
+        <p align="right"><a href="/login/"><input type="button" class="button" value="登入"></a></p>
+        <p align="right"><a href="/register/"><input type="button" class="button" value="註冊"></a></p>
+         {% endif %}
+      </div>
+      <div id="WRAPPER">
+          <div id="SIDE">
+              <p><a href="/mypost/">我發放的文章</a></p>
+              <p><a href="/mycase/">我接受的任務</a></p>
+              <p><a href="/userpage/">我的個人資料</a></p>
+              <p><a href="/firstpage/">回到首頁</a></p>
+              <p><a href="/gamepage/">小遊戲(貪吃蛇)</a></p>
+          </div>
+          <div id="CONTENT">
+              <h5  align="center" valign="center" style="font-size:1.8cm;">我所投放的文章</h5>
+              <table class="hovertable" width="99%">
+                    <tr>
+                      <th width="99%"><center>名稱:{{n}}</center></th>
+                    </tr>
+               </table>
+               <table class="hovertable" width="99%">
+                    <tr>
+                            <td width="200px" style="border-top-width: 0px;"><center>廣告名稱</center></td>
+                    </tr>
+               </table>
+               <table class="hovertable" width="99%">
+                    {% for x in haha %}
+                    {% if n == x.username %}
+                    <tr>
+                            <td width="200px" style="border-top-width: 0px; word-break: break-all;"><center><a href="/adspage/{{x.id}}">{{x.title}}</center></td>
+                              <td width="200px" style="border-top-width: 0px; word-break: break-all;"><center>{{x.clickrate}}</center></td>
+                            {% endif %}
+                            {% endfor %}
+                    </tr>
+               </table>
+          
+                
+
+          </div>
+        </div>
+        <div id="FOOTER">
+            <h2></h2>
+          </div>
+</body>
+{% endblock %}
+</html>

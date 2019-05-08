@@ -10,6 +10,7 @@ from app.models import mission,comments
 page1 = 1
 def firstpage(request,pageindex = None):
     now = datetime.now()
+    user = request.user.get_username()
     #haha ={'title':words[1]}
     global page1 # 重新頁面保留page 1
     PageConstraints = 8 # 每頁顯示數
@@ -198,6 +199,7 @@ def userpage(request,userid=None):
         pos = u.position
         add = u.address
         pic = u.userimage.url
+        mon = u.money
     else:
         uid = userid
         u = usersave.objects.get(id = userid)
@@ -205,6 +207,7 @@ def userpage(request,userid=None):
         pos = u.position
         add = u.address
         pic = u.userimage.url
+        mon = u.money
     return render(request,'userpage.html',locals())
 
 def like(request,commentid=None,detailid=None):
@@ -269,8 +272,23 @@ def postads(request,index=None):
             return redirect('/firstpage/')
     return render(request,"ads.html",locals())
 
-def myads(request,username=None):
-    a = ads.objects.get(username = username)
-
+def adspage(request,pageid=None):
+    haha = ads.objects.get(id = pageid)
+    haha.clickrate += 1
+    haha.save()
+    return render(request,"adspage.html",locals())
+value = []
+def myads(request,user=None):
+    haha = ads.objects.order_by('username')[:]
+    n = request.user.get_username()
+    for i in haha:
+        if i.username == user:
+            value.append(i.clickrate)
+    expect = 0.017
+    money = (sum(value)*expect)
+    u = usersave.objects.get(username = user)
+    u.money = money
+    u.save()
+    del value[:]
     return render(request,"myads.html",locals())
 

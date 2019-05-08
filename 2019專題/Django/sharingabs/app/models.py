@@ -53,7 +53,7 @@ class usersave(models.Model):
     address = models.CharField(max_length=40,null=False)
     position = models.CharField(max_length=40,null=False)
     userimage = models.ImageField(upload_to='imageforuser',default="no image here")
-    money = models.IntegerField(default=0)
+    money = models.FloatField(default=0)
     def __str__(self):
         return self.username
 
@@ -61,7 +61,7 @@ class ads(models.Model):
     username = models.CharField(max_length=40,null=False,default="some error here")
     title = models.CharField(max_length=40,null=False,default="some error here")
     content = models.CharField(max_length=400,null=False,default="some error here")
-    clickrate = models.IntegerField(default=0,null=False)
+    clickrate = models.IntegerField(default=0)
     image = models.ImageField(upload_to="imageforads",default="no image here")
     video = models.FileField(upload_to="imageforads",default="no vid here")
     def __str__(self):

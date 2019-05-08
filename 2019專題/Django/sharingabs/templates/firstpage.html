@@ -62,7 +62,8 @@
       </div>
       <div id="WRAPPER">
           <div id="SIDE">
-              {% if request.user.is_authenticated %}
+            {% if request.user.is_authenticated %}
+            <p><a href="/myads/{{user}}/">我發的廣告</a></p>
             <p><a href="/mycase/">我接受的任務</a></p>
             <p><a href="/mypost/">我發放的文章</a></p>
             <p><a href="/userpage/">我的個人資料</a></p>
