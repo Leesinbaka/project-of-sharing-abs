@@ -279,8 +279,8 @@ def adspage(request,pageid=None):
     haha.clickrate += 1
     haha.save()
     return render(request,"adspage.html",locals())
-value = []
 def myads(request,user=None):
+    value = []
     haha = ads.objects.order_by('username')[:]
     n = request.user.get_username()
     for i in haha:
