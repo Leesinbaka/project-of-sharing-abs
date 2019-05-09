@@ -54,6 +54,7 @@ def detail(request,detailid=None):
     name = id.Mname
     postime = id.postime
     deadline = id.deadline
+    address = id.address
     now = datetime.now()
     if now.month == deadline.month:
         timeremain = now.day - deadline.day
@@ -100,6 +101,7 @@ def post(request):
             m.Mname = request.user.get_username()
             m.deadline = request.POST.get('deadline')
             m.money = request.POST.get('money')
+            m.address = request.POST.get('address')
             m.Mimage = request.FILES['picture']#image here
             m.Mvideo = request.FILES['video']
             status1 = request.POST.get('status')
