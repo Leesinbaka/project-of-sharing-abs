@@ -276,6 +276,11 @@ def postads(request,index=None):
 
 def adspage(request,pageid=None):
     haha = ads.objects.get(id = pageid)
+    author = haha.username
+    title = haha.title
+    content = haha.content
+    image = haha.image.url
+    video = haha.video.url
     haha.clickrate += 1
     haha.save()
     return render(request,"adspage.html",locals())

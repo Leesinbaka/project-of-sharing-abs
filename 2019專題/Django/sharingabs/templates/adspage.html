@@ -1,10 +1,39 @@
 <html>
+        {% load staticfiles %}
 <head>
-這部分為頁首。
-<title>HTML 頁面範例</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="author" content="Flycan.com" />
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <title>{{title}}</title>
+        <link rel="stylesheet" href="{% static 'css/button.css' %}">
+        <link rel="stylesheet" href="{% static 'css/layout.css' %}">
+        <link rel="stylesheet" href="{% static 'css/reset.css' %}">
 </head>
 <body>
-這部分是網頁內文。
+        <div id="HEADER">
+                {% if request.user.is_authenticated %}
+                <p align="right"><a href="/logout/"><input type="button" class="button" value="登出"></a></p>
+                {% else %}
+                <p align="right"><a href="/login/"><input type="button" class="button" value="登入"></a></p>
+                <p align="right"><a href="/register/"><input type="button" class="button" value="註冊"></a></p>
+                 {% endif %}
+              </div>
+              <div id="WRAPPER">
+                  <div id="SIDE">
+                      <p><a href="/myads/{{user}}/">我發的廣告</a></p>
+                       <p><a href="/mycase/">我接受的任務</a></p>
+                       <p><a href="/mypost/">我發放的文章</a></p>
+                       <p><a href="/firstpage/">回到首頁</a></p>
+                       <p><a href="/gamepage/">小遊戲(貪吃蛇)</a></p>
+                  </div>
+                  <div id="CONTENT">
+                        <div class="BOX">
+                                <h2>ADS標題:{{title}}</h2>
+                                <p>ADS內容:{{content}}<br>
+                                圖片:<br><img src="{{image}}" width="70%"></img><br>
+                                影片:<br><video src="{{video}}"width="70%"height="30%"controls="controls"></video></p>
+                        </div></div>
 <div align="center">
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- Homepage Leaderboard -->
