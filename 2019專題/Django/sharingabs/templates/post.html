@@ -23,7 +23,8 @@
                     {% csrf_token %}
                     <h2>
                         請輸入任務題目:<input type="text" name="title" required><br>
-                        請輸入任務內容:<input type="textarea" name="post"required><br>
+                        請輸入任務內容:<br>
+                        <textarea cols="50"rows="20" name="post"required></textarea><br>
 
                         Deadline:<input type="date"name="deadline"required><br>
                         請輸入任務地點:<input type="text" name="address" required><br>

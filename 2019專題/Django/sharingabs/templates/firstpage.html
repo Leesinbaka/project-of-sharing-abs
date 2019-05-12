@@ -88,6 +88,14 @@
                 </tr><tr onmouseover="weblist_onmouseover(this);" onmouseout="weblist_onmouseout(this);">
                   {% endfor %}
                 </table>
+                {% for a in adss %}
+                <tr onmouseover="weblist_onmouseover(this);" onmouseout="weblist_onmouseout(this);">
+                  <td  style="word-break: break-all;"><a href="/adspage/{{a.id}}/" title="">{{ a.title }}</a></td>
+                  <td  style="word-break: break-all;"><center>{{ a.username }}</center></td>
+                  <td  style="word-break: break-all;">{{ a.clickrate }}</td>
+                </tr><tr onmouseover="weblist_onmouseover(this);" onmouseout="weblist_onmouseout(this);">
+                  {% endfor %}
+                </table>
                 <br>
                 <div class="pagefunction">
                   {% if currentpage > 1 %}

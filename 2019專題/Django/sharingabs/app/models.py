@@ -2,7 +2,7 @@ from django.db import models
 # Create your models here.
 class mission(models.Model):
     Mtitle = models.CharField(max_length=40,null=False,default="no title") #connect case
-    Mpost = models.CharField(max_length=400,null=False)
+    Mpost = models.TextField(max_length=400,null=False)
     Mname = models.CharField(max_length=40,null=False,default="anonymous")
     Rating_CHOICES = (
     (1, '1'),

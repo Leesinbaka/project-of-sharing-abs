@@ -25,23 +25,29 @@ def firstpage(request,pageindex = None):
     if pageindex == None: #無參數首頁
         page1 = 1
         units = mission.objects.order_by('-id')[0:PageConstraints] #0到8顯示 [0:8]顯示0,1,2,3,4,5,6,7
+        adss = ads.objects.order_by('-id')[0:PageConstraints]
     elif pageindex == '1': #上一頁
         start = (page1-2)*PageConstraints
         if start >= 0:
             units = mission.objects.order_by('-id')[start:(start+PageConstraints)]
+            adss = ads.objects.order_by('-id')[start:(start+PageConstraints)]
             page1 -= 1 
         else:
+            adss = ads.objects.order_by('-id')[start+8:(start+PageConstraints+8)]
             units = mission.objects.order_by('-id')[start+8:(start+PageConstraints+8)]
     elif pageindex == '2':#下一頁
         start = page1*PageConstraints
         if start < datasize:
+            adss = ads.objects.order_by('-id')[start:(start+PageConstraints)]
             units = mission.objects.order_by('-id')[start:(start+PageConstraints)]
             page1 +=1
         else:
+            adss = ads.objects.order_by('-id')[start-8:(start+PageConstraints-8)]
             units = mission.objects.order_by('-id')[start-8:(start+PageConstraints-8)]
     elif pageindex == '3':
         start = (page1-1)*PageConstraints
         units = mission.objects.order_by('-id')[start:(start+PageConstraints)]
+        adss = ads.objects.order_by('-id')[start:(start+PageConstraints)]
     currentpage = page1
     return render(request,"firstpage.html",locals())
 
@@ -51,6 +57,7 @@ def detail(request,detailid=None):
     comment = comments.objects.order_by('-id')
     title = id.Mtitle
     post = id.Mpost
+    post = post.replace("\r\n"," ")
     name = id.Mname
     postime = id.postime
     deadline = id.deadline
@@ -68,7 +75,7 @@ def detail(request,detailid=None):
     elif qq<0:
         x = (qq-qq-qq)
         message = "任務還有"+str(x)+"天"
-    
+    adss = ads.objects.order_by('-id')
     rating = id.Mrating
     numofworker = id.numofworker
     workername = id.nameofaccept

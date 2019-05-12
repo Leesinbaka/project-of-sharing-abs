@@ -149,7 +149,7 @@
           <div id="CONTENT">
                 <div class="BOX">
                 <h2>任務標題:{{title}}</h2>
-                <p>任務內容:{{post}} <br>
+                <p>任務內容:{{post}}<br>
                 任務地點:{{address}}<br>
                 難度等級:{{rating}}<br>
                 發文日期:{{postime}}<br>
@@ -277,10 +277,7 @@
                   {% endif %}
                 </td>
                 <td style="word-break: break-all;">留言:{{qq.comment}}<br><br><br><br><br><br><br>Like:{{qq.like}}<a href="/like/{{qq.id}}/{{id.id}}">like</a></td>
-                
-
               </tr><tr onmouseover="weblist_onmouseover(this);" onmouseout="weblist_onmouseout(this);">
-                  
               </table>
               {% endif %}
             {% endfor %}
@@ -290,6 +287,13 @@
   </div>
   </div>
         <div id="FOOTER">
+          <h1>公司相關的廣告頁</h1>
+          {% for a in adss %}
+          {% if a.username == name %}
+          <a href="/adspage/{{a.id}}/" title="">{{ a.title }}</a>
+          <p>{{a.clickrate}}</p>
+          {% endif %}
+          {% endfor %}
         </div>
         
 </body>
