@@ -42,6 +42,7 @@ urlpatterns = [
     path('gamepage/',views.game),
     url(r'^edit/(\d+)/$',views.edit),
     url(r'^edit/(\d+)/(\w+)/$',views.edit),
+    url(r'^care/(\w+)/(\d+)/$',views.cares),
 
     path('ads/',views.postads),
     url(r'^ads/(\w+)/$',views.postads),

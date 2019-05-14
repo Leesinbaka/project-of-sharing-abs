@@ -66,3 +66,11 @@ class ads(models.Model):
     video = models.FileField(upload_to="imageforads",default="no vid here")
     def __str__(self):
         return self.username
+
+class care(models.Model):
+    username = models.CharField(max_length=40,null=False,default="some error here")
+    carenum = models.IntegerField(default=0)
+    carename = models.CharField(max_length=40,null=False,default="some error here")
+    careid = models.IntegerField(null=False,default=1)
+    def __str__(self):
+        return self.username

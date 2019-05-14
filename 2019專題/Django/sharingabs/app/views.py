@@ -6,6 +6,7 @@ import math
 from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render,redirect
 from app.models import mission,comments
+from app.models import care
 #words = ["cat","dog","hello world"]#用來測試
 page1 = 1
 def firstpage(request,pageindex = None):
@@ -203,6 +204,7 @@ def mypost(request):
 def userpage(request,userid=None):
     if userid == None:
         n = request.user.get_username()
+        cares = care.objects.order_by('username')[:]
         u = usersave.objects.get(username = n)
         name = u.username
         pos = u.position
@@ -218,7 +220,6 @@ def userpage(request,userid=None):
         pic = u.userimage.url
         mon = u.money
     return render(request,'userpage.html',locals())
-
 def like(request,commentid=None,detailid=None):
     if commentid != None:
         c = comments.objects.get(id = commentid)
@@ -293,16 +294,34 @@ def adspage(request,pageid=None):
     return render(request,"adspage.html",locals())
 def myads(request,user=None):
     value = []
+    pp = []
+    pp.append(1)
     haha = ads.objects.order_by('username')[:]
     n = request.user.get_username()
+    c = care.objects.order_by('username')[:]
+    for x in c:
+        if x.username == user:
+            pp.append(x.carenum)
     for i in haha:
         if i.username == user:
             value.append(i.clickrate)
     expect = 0.017
-    money = (sum(value)*expect)
+    money = (0.1*sum(pp)+(sum(value)*expect))
     u = usersave.objects.get(username = user)
     u.money = money
     u.save()
     del value[:]
+    del pp[1:]
     return render(request,"myads.html",locals())
 
+def cares(request,name=None,detailid=None):
+    if name != None:
+        c = care()
+        u = usersave.objects.get(username = name)
+        c.careid = u.id
+        c.carenum = 1
+        c.carename = name
+        m = mission.objects.get(id = detailid)
+        c.username = m.Mname
+        c.save()
+    return redirect("/detail/"+detailid)
