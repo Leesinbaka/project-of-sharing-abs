@@ -218,7 +218,7 @@ def userpage(request,userid=None):
         pos = u.position
         add = u.address
         pic = u.userimage.url
-        mon = u.money
+        mon = "nope"
     return render(request,'userpage.html',locals())
 def like(request,commentid=None,detailid=None):
     if commentid != None:
