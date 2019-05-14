@@ -79,9 +79,14 @@
                <tr>
                   　<td><center>網頁中賺到的錢:{{mon}}塊</center></td>
               </tr>
+              {% for w in cares %}
+                  {% if w.username == name %}
+              <tr>
+                  　<td>關注你的人:<a href ="/userpage/{{w.careid}}">{{w.carename}}</a></td>  
+                </tr>
+                {% endif %}
+                {% endfor %}
                 </table>
-                <br>
-
           </div>
         </div>
         <div id="FOOTER">

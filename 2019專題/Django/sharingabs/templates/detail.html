@@ -135,6 +135,10 @@
     </div>
       <div id="WRAPPER">
           <div id="SIDE">
+                <p><a href="/care/{{user}}/{{id.id}}/">關注此用戶</a></p>
+                {% if request.user.is_authenticated %}
+                <p><a href="/addcase/{{id.id}}/">加入我的任務列表</a></p>
+                {% endif %}
                 <p><a href="/firstpage/3">回首頁</a></p>
                 {% if name == user %}
                 <p><a href="/edit/{{id.id}}">更改文章</a></p>
@@ -243,9 +247,7 @@
                   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLj6RqOdV9WCDNmfetceVJ5AQJeOw3KY4&libraries=places&callback=initAutocomplete"async defer></script>
                 
                 <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-                {% if request.user.is_authenticated %}
-                <p align="left" style="font-size:35px;"><a href="/addcase/{{id.id}}/">加入我的任務列表</a></p>
-                {% endif %}
+                
           </div>
           </div>
         </div>
