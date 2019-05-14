@@ -88,14 +88,7 @@
                 </tr><tr onmouseover="weblist_onmouseover(this);" onmouseout="weblist_onmouseout(this);">
                   {% endfor %}
                 </table>
-                {% for a in adss %}
-                <tr onmouseover="weblist_onmouseover(this);" onmouseout="weblist_onmouseout(this);">
-                  <td  style="word-break: break-all;"><a href="/adspage/{{a.id}}/" title="">{{ a.title }}</a></td>
-                  <td  style="word-break: break-all;"><center>{{ a.username }}</center></td>
-                  <td  style="word-break: break-all;">{{ a.clickrate }}</td>
-                </tr><tr onmouseover="weblist_onmouseover(this);" onmouseout="weblist_onmouseout(this);">
-                  {% endfor %}
-                </table>
+
                 <br>
                 <div class="pagefunction">
                   {% if currentpage > 1 %}
@@ -104,6 +97,23 @@
                   {% if currentpage < totalpage %}
                   <h1 align="center" style="font-size:0.7cm;"><a href="/firstpage/2/" title="nextpage">下一頁</a></h1>
                     {% endif %}
+
+                    <marquee direction="up"><h5 align="center" valign="center" style="font-size:1.8cm;" >廣告列表</h5> </marquee>
+                    <table class="hovertable" width="99%">
+                        <tr>
+                            <th width="30%">標題</th><th width="10%">發文者</th><th width="10%">點撃數</th>
+                          </tr>
+                    {% for a in adss %}
+                    <tr onmouseover="weblist_onmouseover(this);" onmouseout="weblist_onmouseout(this);">
+                      <td  style="word-break: break-all;"><a href="/adspage/{{a.id}}/" title="">{{ a.title }}</a></td>
+                      <td  style="word-break: break-all;"><center>{{ a.username }}</center></td>
+                      <td  style="word-break: break-all;">{{ a.clickrate }}</td>
+                    </tr><tr onmouseover="weblist_onmouseover(this);" onmouseout="weblist_onmouseout(this);">
+                      {% endfor %}
+                    </tr>
+                    </table>
+
+
 
                   <p align="right"><a href="/post/"><input type="button" class="button" value="發文"/></a></p>
                   <p align="right"><a href="/ads/"><input type="button" class="button" value="發廣告"/></a></p>
