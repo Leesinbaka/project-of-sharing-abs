@@ -16,8 +16,8 @@
      * element that contains the map. */
     #map {
       position: absolute;
-      height: 30%;
-      width: 40%;
+      height: 300px;
+      width: 600px;
       margin: 0px;
       padding: 0px;
     }
@@ -114,8 +114,7 @@
     border-style: solid;
     border-color: #a3ddf8c9;
   }
-    </style>
-    
+    </style> 
   <script>
     function weblist_onmouseover(obj){
     obj.style.backgroundColor='#fcf4a1';
@@ -150,6 +149,22 @@
                 <p>如要刪文請聯絡管理員</p>
                 <p><a href="/gamepage/">小遊戲(貪吃蛇)</a></p>
           </div>
+          <div id="SIDE">
+              <p>公司相關的廣告頁</p>
+              <table class="hovertable" width="100%" >
+                  <tr>
+                      <th >標題</th><th >點擊</th>
+                    </tr>
+              {% for a in adss %}
+              <tr onmouseover="weblist_onmouseover(this);" onmouseout="weblist_onmouseout(this);">
+                <td  style="word-break: break-all;"><a href="/adspage/{{a.id}}/" title="" style="font-size:20px">{{ a.title }}</a></td>
+                <td  style="word-break: break-all;"><p style="font-size:20px">{{ a.clickrate }}</p></td>
+              </tr><tr onmouseover="weblist_onmouseover(this);" onmouseout="weblist_onmouseout(this);">
+                {% endfor %}
+              </tr>
+              </table>
+
+        </div>
           <div id="CONTENT">
                 <div class="BOX">
                 <h2>任務標題:{{title}}</h2>
@@ -165,9 +180,10 @@
                 有多少人願意參加:{{numofworker}}<br>
                 參加人名單:{{workername}}<br>
                 圖片:<br><img src="{{img}}" width="70%"></img><br>
-                影片:<br><video src="{{vid}}"width="50%"height="30%"controls="controls"></video>
-                <p><input id="pac-input" class="controls" type="text" placeholder="search box" value="{{address}}"></p>
-                  <div id="map"></div>
+                影片:<br><video src="{{vid}}"width="50%"height="30%"controls="controls"></video><br>
+                <input id="pac-input" class="controls" type="text" placeholder="search box" value="{{address}}"></p>
+
+                <p><div id="map"></div></p>
                   <script>
                     // This example adds a search box to a map, using the Google Place Autocomplete
                     // feature. People can enter geographical searches. The search box will return a
@@ -244,7 +260,8 @@
                       });
                     }
                   </script>
-                  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLj6RqOdV9WCDNmfetceVJ5AQJeOw3KY4&libraries=places&callback=initAutocomplete"async defer></script>
+                  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLj6RqOdV9WCDNmfetceVJ5AQJeOw3KY4&libraries=places
+                  &callback=initAutocomplete"async defer></script>
                 
                 <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
                 
@@ -289,13 +306,6 @@
   </div>
   </div>
         <div id="FOOTER">
-          <h1>公司相關的廣告頁</h1>
-          {% for a in adss %}
-          {% if a.username == name %}
-          <a href="/adspage/{{a.id}}/" title="">{{ a.title }}</a>
-          <p>{{a.clickrate}}</p>
-          {% endif %}
-          {% endfor %}
         </div>
         
 </body>

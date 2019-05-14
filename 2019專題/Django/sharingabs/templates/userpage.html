@@ -63,10 +63,8 @@
           </div>
           <div id="CONTENT">
               <h5  align="center" valign="center" style="font-size:1.8cm;">{{name}}的個人資料</h5>
-
               <table class="hovertable" width="99%">
-                <tr>
-                
+                <tr> 
                    　<td rowspan="3"style="height: 300px;"> <center>頭像</center><center><img src="{{pic}}" style="height:250px;"></center></td>
                      <td><center>名稱:{{name}} </center></td>
                 </tr>
@@ -76,7 +74,9 @@
                 <tr>
                    　<td><center>地址:{{add}}</center></td>
                </tr>
-               <tr>
+                </table>
+                <table class="hovertable" width="99%">               
+                  <tr>
                   　<td><center>網頁中賺到的錢:{{mon}}塊</center></td>
               </tr>
               {% for w in cares %}
@@ -86,7 +86,7 @@
                 </tr>
                 {% endif %}
                 {% endfor %}
-                </table>
+              </table>
           </div>
         </div>
         <div id="FOOTER">
