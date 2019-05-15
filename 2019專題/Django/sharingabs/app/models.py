@@ -13,10 +13,10 @@ class mission(models.Model):
     Mrating = models.IntegerField(choices=Rating_CHOICES, default=5)
     postime = models.DateField(auto_now=True)
     count = models.IntegerField(default=0)
-    money = models.IntegerField(default=0)
+    money = models.CharField(max_length=400,null=False)
     numofworker = models.IntegerField(default=0)
-    Mimage = models.ImageField(upload_to='imageformission',default="haha.png")
-    Mvideo = models.FileField(upload_to='imageformission',default="haha.png",blank=True)
+    Mimage = models.ImageField(upload_to='imageformission',default="/image/haha.png")
+    Mvideo = models.FileField(upload_to='imageformission',default="/image/haha.png",blank=True)
     status = models.CharField(max_length=20,null=False,default="可") #connect casestatus
     deadline = models.DateField() #connect casetime
     nameofaccept = models.CharField(max_length=400)
@@ -30,7 +30,7 @@ class userdata(models.Model):
     casetime = models.DateField(auto_now=True)
     daysremain = models.IntegerField(null=False,default=0)
     caseid = models.IntegerField(default=0)
-    image = models.ImageField(upload_to='imageforcase',default="haha.png")
+    image = models.ImageField(upload_to='imageforcase',default="/image/haha.png")
     def __str__(self):
         return self.username
 # Mtitle

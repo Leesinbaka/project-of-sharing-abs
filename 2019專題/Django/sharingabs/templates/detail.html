@@ -168,7 +168,14 @@
           <div id="CONTENT">
                 <div class="BOX">
                 <h2>任務標題:{{title}}</h2>
-                <p>任務內容:{{post}}<br>
+                <p>任務內容:<br><script type="text/javascript">
+                  　var post = "{{post}}";
+                  　var postafter = new Array();
+                  　var postafter = post.split("   ");
+                  for(var i = 0; i<postafter.length;i++)
+                  　document.write(postafter[i] + '<br>');
+                   </script>
+                <!-- 任務內容:{{post}}<br> -->
                 任務地點:{{address}}<br>
                 難度等級:{{rating}}<br>
                 發文日期:{{postime}}<br>
@@ -181,10 +188,9 @@
                 參加人名單:{{workername}}<br>
                 圖片:<br><img src="{{img}}" width="70%"></img><br>
                 影片:<br><video src="{{vid}}"width="50%"height="30%"controls="controls"></video><br>
-                <input id="pac-input" class="controls" type="text" placeholder="search box" value="{{address}}"></p>
-
-                <p><div id="map"></div></p>
-                  <script>
+                <p><input id="pac-input" class="controls" type="text" placeholder="search box" value="{{address}}"></p>
+                <div id="map"></div></p>
+                  <script type="text/javascript">
                     // This example adds a search box to a map, using the Google Place Autocomplete
                     // feature. People can enter geographical searches. The search box will return a
                     // pick list containing a mix of places and predicted search terms.
@@ -192,11 +198,10 @@
                     // This example requires the Places library. Include the libraries=places
                     // parameter when you first load the API. For example:
                     // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-              
                     function initAutocomplete() {
                       var map = new google.maps.Map(document.getElementById('map'), {
-                        center: {lat: -33.8688, lng: 151.2195},
-                        zoom: 13,
+                        center: {lat: 25.0280688, lng: 121.548142},
+                        zoom: 16,
                         mapTypeId: 'roadmap'
                       });
               
@@ -260,10 +265,9 @@
                       });
                     }
                   </script>
-                  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLj6RqOdV9WCDNmfetceVJ5AQJeOw3KY4&libraries=places
-                  &callback=initAutocomplete"async defer></script>
+                  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLj6RqOdV9WCDNmfetceVJ5AQJeOw3KY4&libraries=places&callback=initAutocomplete"async defer></script>
                 
-                <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
                 
           </div>
           </div>

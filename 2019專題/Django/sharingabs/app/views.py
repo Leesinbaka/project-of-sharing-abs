@@ -295,7 +295,6 @@ def adspage(request,pageid=None):
 def myads(request,user=None):
     value = []
     pp = []
-    pp.append(1)
     haha = ads.objects.order_by('username')[:]
     n = request.user.get_username()
     c = care.objects.order_by('username')[:]
@@ -311,7 +310,7 @@ def myads(request,user=None):
     u.money = money
     u.save()
     del value[:]
-    del pp[1:]
+    del pp[:]
     return render(request,"myads.html",locals())
 
 def cares(request,name=None,detailid=None):
