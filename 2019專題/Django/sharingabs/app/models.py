@@ -13,6 +13,7 @@ class mission(models.Model):
     Mrating = models.IntegerField(choices=Rating_CHOICES, default=5)
     postime = models.DateField(auto_now=True)
     count = models.IntegerField(default=0)
+    company = models.CharField(max_length=40,null=False,default="company")
     money = models.CharField(max_length=400,null=False)
     numofworker = models.IntegerField(default=0)
     Mimage = models.ImageField(upload_to='imageformission',default="/image/haha.png")
@@ -53,6 +54,7 @@ class usersave(models.Model):
     address = models.CharField(max_length=40,null=False)
     position = models.CharField(max_length=40,null=False)
     userimage = models.ImageField(upload_to='imageforuser',default="no image here")
+    userstatus = models.CharField(max_length=20,null=False,default="普通用戶")
     money = models.FloatField(default=0)
     def __str__(self):
         return self.username
@@ -63,7 +65,6 @@ class ads(models.Model):
     content = models.CharField(max_length=400,null=False,default="some error here")
     clickrate = models.IntegerField(default=0)
     image = models.ImageField(upload_to="imageforads",default="no image here")
-    video = models.FileField(upload_to="imageforads",default="no vid here")
     def __str__(self):
         return self.username
 

@@ -7,6 +7,14 @@ from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render,redirect
 from app.models import mission,comments
 from app.models import care
+import random
+from django.contrib import auth
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate
+from django.contrib.auth.models import User
+from app.models import usersave
+from django.core.exceptions import PermissionDenied
+from django.contrib.auth.admin import UserAdmin
 #words = ["cat","dog","hello world"]#用來測試
 page1 = 1
 def firstpage(request,pageindex = None):
@@ -18,6 +26,13 @@ def firstpage(request,pageindex = None):
     missions = mission.objects.all().order_by('-id')#FILO First In Last Out
     datasize = len(missions)
     totalpage = math.ceil(datasize/PageConstraints)
+    try:
+        some = usersave.objects.get(username = user)
+        sta = some.userstatus
+        check = "普通用戶"
+    except:
+        sta = "普通用戶"
+        check = "普通用戶"
 #       math.ceil(-45.17) :  -45.0
 #       math.ceil(100.12) :  101.0
 #       math.ceil(100.72) :  101.0
@@ -63,6 +78,7 @@ def detail(request,detailid=None):
     postime = id.postime
     deadline = id.deadline
     address = id.address
+    company = id.company
     now = datetime.now()
     if now.month == deadline.month:
         timeremain = now.day - deadline.day
@@ -111,6 +127,7 @@ def post(request):
             m.money = request.POST.get('money')
             m.address = request.POST.get('address')
             m.Mimage = request.FILES['picture']#image here
+            m.company = request.POST.get('company')
             m.Mvideo = request.FILES['video']
             status1 = request.POST.get('status')
             if status1 == None:
@@ -125,19 +142,14 @@ def post(request):
     else:
         mess =""
     return render(request,"post.html",locals())
-from django.core.exceptions import PermissionDenied
-from django.contrib.auth.admin import UserAdmin
+
 def delpost(request,detailid=None):
     if detailid != None:
         id = mission.objects.get(id = detailid)
         id.delete()
     return redirect("/firstpage/")
 # login , register , logout 的打法
-from django.contrib import auth
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import authenticate
-from django.contrib.auth.models import User
-from app.models import usersave
+
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -148,6 +160,12 @@ def register(request):
             u.address = request.POST.get('address')
             u.position = request.POST.get('position')
             u.userimage = request.FILES['pic']
+            identify= request.POST.get('sta')
+            if identify == None:
+                identify = "普通用戶"
+            else:
+                identify = "公司"
+            u.userstatus = identify
             u.save()
             return redirect('/firstpage/')
     else:
@@ -211,6 +229,7 @@ def userpage(request,userid=None):
         add = u.address
         pic = u.userimage.url
         mon = u.money
+        sta = u.userstatus
     else:
         uid = userid
         u = usersave.objects.get(id = userid)
@@ -219,6 +238,7 @@ def userpage(request,userid=None):
         add = u.address
         pic = u.userimage.url
         mon = "nope"
+        sta = u.userstatus
     return render(request,'userpage.html',locals())
 def like(request,commentid=None,detailid=None):
     if commentid != None:
@@ -276,8 +296,7 @@ def postads(request,index=None):
             content = request.POST.get('content')
             username = request.user.get_username()
             image = request.FILES['picture']#image here
-            video = request.FILES['video']
-            ads.objects.create(title=title,content=content,username=username,image=image,video=video)
+            ads.objects.create(title=title,content=content,username=username,image=image)
             mess ="input succeeded"
             return redirect('/firstpage/')
     return render(request,"ads.html",locals())
@@ -288,7 +307,6 @@ def adspage(request,pageid=None):
     title = haha.title
     content = haha.content
     image = haha.image.url
-    video = haha.video.url
     haha.clickrate += 1
     haha.save()
     return render(request,"adspage.html",locals())

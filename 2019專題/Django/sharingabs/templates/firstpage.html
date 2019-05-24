@@ -115,8 +115,16 @@
                     </table>
 
 
-
+                  {% if sta == check %}
+                  <p align="right"><a href=""><input type="button" onclick="myFunction()"class="button" value="發文"/></a></p>
+                  <script>
+                    function myFunction() {
+                      alert("公司用戶才可以發文_(:3");
+                    }
+                  </script>
+                  {% else %}
                   <p align="right"><a href="/post/"><input type="button" class="button" value="發文"/></a></p>
+                  {% endif %}
                   <p align="right"><a href="/ads/"><input type="button" class="button" value="發廣告"/></a></p>
 
             </div>

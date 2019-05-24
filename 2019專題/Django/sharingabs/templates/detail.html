@@ -142,11 +142,11 @@
                 {% if name == user %}
                 <p><a href="/edit/{{id.id}}">更改文章</a></p>
                 {% endif %}
-                {% if user.is_superuser %}
-                <p><a href="/edit/{{id.id}}">更改文章</a></p>
+                {% if request.user.is_superuser %}
                 <p><a href="/delete/{{id.id}}">刪除文章</a></p>
-                {% endif %}
+                {% else %}
                 <p>如要刪文請聯絡管理員</p>
+                {% endif %}
                 <p><a href="/gamepage/">小遊戲(貪吃蛇)</a></p>
           </div>
           <div id="SIDE">
@@ -156,10 +156,12 @@
                       <th >標題</th><th >點擊</th>
                     </tr>
               {% for a in adss %}
+              {% if a.username == name %}
               <tr onmouseover="weblist_onmouseover(this);" onmouseout="weblist_onmouseout(this);">
                 <td  style="word-break: break-all;"><a href="/adspage/{{a.id}}/" title="" style="font-size:20px">{{ a.title }}</a></td>
                 <td  style="word-break: break-all;"><p style="font-size:20px">{{ a.clickrate }}</p></td>
               </tr><tr onmouseover="weblist_onmouseover(this);" onmouseout="weblist_onmouseout(this);">
+                {% endif %}
                 {% endfor %}
               </tr>
               </table>
@@ -168,26 +170,27 @@
           <div id="CONTENT">
                 <div class="BOX">
                 <h2>任務標題:{{title}}</h2>
-                <p>任務內容:<br><script type="text/javascript">
+                <p><b>任務內容:</b><br><script type="text/javascript">
                   　var post = "{{post}}";
                   　var postafter = new Array();
                   　var postafter = post.split("   ");
                   for(var i = 0; i<postafter.length;i++)
                   　document.write(postafter[i] + '<br>');
                    </script>
+                   <b>公司名字:</b>{{company}}<br>
                 <!-- 任務內容:{{post}}<br> -->
-                任務地點:{{address}}<br>
-                難度等級:{{rating}}<br>
-                發文日期:{{postime}}<br>
-                任務開始日:{{deadline}}<br>
-                {{message}}<br>
-                點擊次數:{{count}}<br>
-                發文者:{{name}}<br>
-                報酬:{{money}}<br>
-                有多少人願意參加:{{numofworker}}<br>
-                參加人名單:{{workername}}<br>
-                圖片:<br><img src="{{img}}" width="70%"></img><br>
-                影片:<br><video src="{{vid}}"width="50%"height="30%"controls="controls"></video><br>
+                <b>任務地點:</b>{{address}}<br>
+                <b>難度等級:</b>{{rating}}<br>
+                <b>發文日期:</b>{{postime}}<br>
+                <b>任務開始日:</b>{{deadline}}<br>
+                <b>{{message}}</b><br>
+                <b>點擊次數:</b>{{count}}<br>
+                <b>發文者:</b>{{name}}<br>
+                <b>報酬:</b>{{money}}<br>
+                <b>有多少人願意參加:</b>{{numofworker}}<br>
+                <b>參加人名單:</b>{{workername}}<br>
+                <b>圖片:</b><br><img src="{{img}}" width="70%"></img><br>
+                <b>影片:</b><br><video src="{{vid}}"width="50%"height="30%"controls="controls"></video><br>
                 <p><input id="pac-input" class="controls" type="text" placeholder="search box" value="{{address}}"></p>
                 <div id="map"></div></p>
                   <script type="text/javascript">
@@ -291,7 +294,7 @@
             {% for qq in comment %}
             {% if qq.caseid == id.id %}
             <table class="hovertable" width="100%">
-              <tr onmouseover="weblist_onmouseover(this);" onmouseout="weblist_onmouseout(this);">
+              <tr>
                 <td style="width: 270px;">
                   <center><img src="{{qq.usericon}}" style="height:200px;"></center>
                   <br><a href="/userpage/{{qq.uid}}">用戶名稱:{{qq.user}}</a>
