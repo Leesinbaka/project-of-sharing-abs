@@ -15,6 +15,9 @@ from django.contrib.auth.models import User
 from app.models import usersave
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.admin import UserAdmin
+from app.models import userdata
+from django.contrib import messages
+from app.models import ads
 #words = ["cat","dog","hello world"]#用來測試
 page1 = 1
 def firstpage(request,pageindex = None):
@@ -33,11 +36,6 @@ def firstpage(request,pageindex = None):
     except:
         sta = "普通用戶"
         check = "普通用戶"
-#       math.ceil(-45.17) :  -45.0
-#       math.ceil(100.12) :  101.0
-#       math.ceil(100.72) :  101.0
-#       math.ceil(119L) :  119.0
-#       math.ceil(math.pi) : 4.0
     if pageindex == None: #無參數首頁
         page1 = 1
         units = mission.objects.order_by('-id')[0:PageConstraints] #0到8顯示 [0:8]顯示0,1,2,3,4,5,6,7
@@ -66,7 +64,6 @@ def firstpage(request,pageindex = None):
         adss = ads.objects.order_by('-id')[start:(start+PageConstraints)]
     currentpage = page1
     return render(request,"firstpage.html",locals())
-
 def detail(request,detailid=None):
     user = request.user.get_username()
     id = mission.objects.get(id = detailid)
@@ -115,7 +112,6 @@ def detail(request,detailid=None):
         c.like = 0
         c.save()
     return render(request,"detail.html",locals())
-
 def post(request):
     if request.method == "POST":
         if request.user.is_authenticated:
@@ -142,7 +138,6 @@ def post(request):
     else:
         mess =""
     return render(request,"post.html",locals())
-
 def delpost(request,detailid=None):
     if detailid != None:
         id = mission.objects.get(id = detailid)
@@ -190,39 +185,33 @@ def login(request):
         else:
             message='failed'
     return render(request,"login.html",locals())
-
-
 def logout(request):
     auth.logout(request)
     return redirect('/firstpage/')
-from app.models import userdata
-from django.contrib import messages
 def addcase(request,detailid=None):
     name = request.user.get_username()
     caseid = mission.objects.get(id = detailid)
+    u = usersave.objects.get(username = name)
     id = caseid.id
     case = caseid.Mtitle
     sta = caseid.status
     deadline = caseid.deadline
     caseid.numofworker += 1
-    caseid.nameofaccept += (name+' ')
+    caseid.nameofaccept += (str(u.id)+',')
     caseid.save()
     save = userdata.objects.create(case = case,username = name,casestatus = sta,casetime = deadline,caseid = id)
     save.save()
     messages.success(request,"新增了新的任務")
     return redirect('/firstpage/3')
-
 def case(request):
     n = request.user.get_username()
     now = datetime.now()
     data1 = userdata.objects.order_by('username')[:]
     return render(request,'mycase.html',locals())
-
 def mypost(request):
     n = request.user.get_username()
     units = mission.objects.order_by('Mname')[:]
     return render(request,'mypost.html',locals())
-
 def userpage(request,userid=None):
     if userid == None:
         n = request.user.get_username()
@@ -250,7 +239,6 @@ def like(request,commentid=None,detailid=None):
         c.like += 1
         c.save()
     return redirect("/detail/"+detailid)
-
 def game(request):
     return render(request,"gamepage.html",locals())
 def edit(request,detailid = None,mode=None):
@@ -284,15 +272,11 @@ def edit(request,detailid = None,mode=None):
     else:
         e = mission.objects.get(id = detailid)
     return render(request,"edit.html",locals())
-
 def delcomment(request,commentid=None,detailid=None):
     if commentid != None:
         c = comments.objects.get(id = commentid)
         c.delete()
     return redirect('/detail/'+detailid)
-
-from app.models import ads
-
 def postads(request,index=None):
     if index == "ads":
         if request.user.is_authenticated:
@@ -304,7 +288,6 @@ def postads(request,index=None):
             mess ="input succeeded"
             return redirect('/firstpage/')
     return render(request,"ads.html",locals())
-
 def adspage(request,pageid=None):
     haha = ads.objects.get(id = pageid)
     author = haha.username
@@ -334,7 +317,6 @@ def myads(request,user=None):
     del value[:]
     del pp[:]
     return render(request,"myads.html",locals())
-
 def cares(request,name=None,detailid=None):
     if name != None:
         c = care()
@@ -346,7 +328,17 @@ def cares(request,name=None,detailid=None):
         c.username = m.Mname
         c.save()
     return redirect("/detail/"+detailid)
-
 def admincheck(request):
     u = usersave.objects.all().order_by('-id')
     return render(request,"admincheck.html",locals())
+
+def joinlist(request,detailid = None):
+    m = mission.objects.get(id = detailid)
+    qq = m.nameofaccept.split(',')
+    hehe = []
+    iddd = []
+    for i in qq:
+        u = usersave.objects.get(id = i)
+        hehe.append(u.username)
+        iddd.append(u.id)
+    return render(request,"joinlist.html",locals())
