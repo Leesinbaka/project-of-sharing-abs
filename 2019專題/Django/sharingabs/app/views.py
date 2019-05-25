@@ -228,7 +228,7 @@ def userpage(request,userid=None):
         pos = u.position
         add = u.address
         pic = u.userimage.url
-        mon = u.money
+        mon = float('%.2f' % u.money)
         sta = u.userstatus
     else:
         uid = userid
