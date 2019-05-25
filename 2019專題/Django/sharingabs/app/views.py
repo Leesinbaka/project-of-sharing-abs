@@ -151,9 +151,11 @@ def delpost(request,detailid=None):
 # login , register , logout 的打法
 
 def register(request):
+    checkac = "False"
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
+            checkac = "False"
             user = form.save()
             u = usersave()
             u.username = request.POST.get('name')
@@ -170,6 +172,7 @@ def register(request):
             return redirect('/firstpage/')
     else:
         form = UserCreationForm()
+        checkac = "True"
     return render(request,"register.html",locals())
 def login(request):
     if request.method =='POST':
@@ -342,3 +345,7 @@ def cares(request,name=None,detailid=None):
         c.username = m.Mname
         c.save()
     return redirect("/detail/"+detailid)
+
+def admincheck(request):
+    u = usersave.objects.all().order_by('-id')
+    return render(request,"admincheck.html",locals())
