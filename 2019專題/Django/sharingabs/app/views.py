@@ -149,13 +149,14 @@ def delpost(request,detailid=None):
         id.delete()
     return redirect("/firstpage/")
 # login , register , logout 的打法
-
 def register(request):
-    checkac = "False"
+    f = "False"
+    t = "True"
+    checkac = f
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            checkac = "False"
+            checkac = f
             user = form.save()
             u = usersave()
             u.username = request.POST.get('name')
@@ -172,7 +173,7 @@ def register(request):
             return redirect('/firstpage/')
     else:
         form = UserCreationForm()
-        checkac = "True"
+        checkac = t
     return render(request,"register.html",locals())
 def login(request):
     if request.method =='POST':
