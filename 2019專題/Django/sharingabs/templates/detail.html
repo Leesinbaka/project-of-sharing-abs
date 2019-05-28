@@ -316,13 +316,15 @@
             <table class="hovertable" width="100%">
               <tr>
                 <td style="width: 270px;">
-                  <center><img src="{{qq.usericon}}" style="height:200px;"></center>
+                  <center><img src="{{qq.usericon}}" style="height:200px;width: 270px;"></center>
                   <br><a href="/userpage/{{qq.uid}}">用戶名稱:{{qq.user}}</a>
                   {% if user.is_superuser %}
                       <a href="/delcomment/{{qq.id}}/{{id.id}}">del comment!</a>
+                      {% else %}
+                      <p style="font-size:0.2cm;">只有管理員才可以del comment<p>
                   {% endif %}
                 </td>
-                <td style="word-break: break-all;">留言:{{qq.comment}}<br><br><br><br><br><br><br>Like:{{qq.like}}<a href="/like/{{qq.id}}/{{id.id}}">like</a></td>
+                <td style="word-break:break-all;">留言:{{qq.comment}}<br><br><br><br><br><br><br>Like:{{qq.like}}<a href="/like/{{qq.id}}/{{id.id}}">like</a></td>
               </tr><tr onmouseover="weblist_onmouseover(this);" onmouseout="weblist_onmouseout(this);">
               </table>
               {% endif %}

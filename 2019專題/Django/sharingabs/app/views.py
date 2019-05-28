@@ -195,23 +195,24 @@ def addcase(request,detailid=None):
     name = request.user.get_username()
     caseid = mission.objects.get(id = detailid)
     u = usersave.objects.get(username = name)
-    id = caseid.id
-    check = userdata.objects.filter(caseid = id)
+    check = userdata.objects.filter(caseid = detailid)
     for i in check:
         if i.username == name:
             mess="你不要加兩次同一個任務"
             return render(request,"error.html",locals())
-        elif i.username != name:
-            case = caseid.Mtitle
-            sta = caseid.status
-            deadline = caseid.deadline
-            caseid.numofworker += 1
-            caseid.nameofaccept += (str(u.id)+',3')
-            caseid.save()
-            save = userdata.objects.create(case = case,username = name,casestatus = sta,casetime = deadline,caseid = id)
-            save.save()
-            messages.success(request,"新增了新的任務")
-            return redirect('/firstpage/3')
+    name = request.user.get_username()
+    caseid = mission.objects.get(id = detailid)
+    u = usersave.objects.get(username = name)
+    id = caseid.id
+    case = caseid.Mtitle
+    sta = caseid.status
+    deadline = caseid.deadline
+    caseid.numofworker += 1
+    caseid.nameofaccept += (str(u.id)+',3')
+    caseid.save()
+    save = userdata.objects.create(case = case,username = name,casestatus = sta,casetime = deadline,caseid = id)
+    save.save()
+    messages.success(request,"新增了新的任務")
     return redirect('/firstpage/3')
 def case(request):
     n = request.user.get_username()

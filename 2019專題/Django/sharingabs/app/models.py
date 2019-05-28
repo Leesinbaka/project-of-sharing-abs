@@ -31,7 +31,6 @@ class userdata(models.Model):
     casetime = models.DateField(auto_now=True)
     daysremain = models.IntegerField(null=False,default=0)
     caseid = models.IntegerField(default=0)
-    image = models.ImageField(upload_to='imageforcase',default="/image/haha.png")
     def __str__(self):
         return self.username
 # Mtitle
