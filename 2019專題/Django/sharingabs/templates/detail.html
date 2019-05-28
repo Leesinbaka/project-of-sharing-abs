@@ -140,6 +140,7 @@
                 {% endif %}
                 <p><a href="/firstpage/3">回首頁</a></p>
                 {% if name == user %}
+                <p><a href="/joinlist/{{id.id}}">joinlist</a></p>
                 <p><a href="/edit/{{id.id}}">更改文章</a></p>
                 {% endif %}
                 {% if request.user.is_superuser %}
@@ -147,6 +148,7 @@
                 {% else %}
                 <p>如要刪文請聯絡管理員</p>
                 {% endif %}
+                
                 <p><a href="/gamepage/">小遊戲(貪吃蛇)</a></p>
           </div>
           <div id="SIDE">

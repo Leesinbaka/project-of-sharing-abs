@@ -1,0 +1,29 @@
+
+<body>
+        <h2>用戶名單</h2>
+      <table>
+        <th><table border=1>
+            <tr>
+            <th>賬號名稱</th>
+            </tr>
+            {% for x in hehe %}
+            <tr>
+            <td>{{x}}</td>
+            </tr>
+            {% endfor %}
+            </table>
+        </th>
+        <th>
+            <table border=1>
+                <tr>
+            <th>link</th>
+        </tr>
+            {% for o in iddd %}
+            <tr>
+            <td><a href="/userpage/{{o}}">Link to userpage</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </th>
+    </table>
+        </body>

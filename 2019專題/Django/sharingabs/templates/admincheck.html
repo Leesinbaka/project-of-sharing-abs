@@ -1,0 +1,16 @@
+
+<body>
+<h2>用戶名單</h2>
+<table border="1">
+    <tr>
+    <th>賬號名稱</th>
+    <th>用戶身份</th>
+    </tr>
+    {% for i in u %}
+    <tr>
+    <td>{{i.username}}</td>
+    <td>{{i.userstatus}}</td>
+    </tr>
+    {% endfor %}
+    </table>
+</body>
