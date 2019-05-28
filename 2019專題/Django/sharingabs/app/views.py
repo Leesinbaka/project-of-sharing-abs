@@ -144,6 +144,8 @@ def post(request):
 def delpost(request,detailid=None):
     if detailid != None:
         id = mission.objects.get(id = detailid)
+        case = userdata.objects.get(caseid = detailid)
+        case.delete()
         id.delete()
     return redirect("/firstpage/")
 # login , register , logout 的打法
