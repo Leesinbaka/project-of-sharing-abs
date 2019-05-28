@@ -1,16 +1,54 @@
+{% load staticfiles %}
+<html>
+        <head>
+                <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+                <meta name="author" content="Flycan.com" />
+                <title>所有用戶名單</title>
+                <link rel="stylesheet" href="{% static 'css/button.css' %}">
+                <link rel="stylesheet" href="{% static 'css/layout.css' %}">
+                <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+                <!-- <img src="/static/images/titleicon.jpg" width="1200" height="500" alt="" style="display:block; margin:auto;"/> -->
+                </head>
+        <body>
+                <div id="HEADER">
+                      
+                  </div>
+            
+                  <div id="WRAPPER">
+                        <div id="SIDE">  
+                        <p><a href="/firstpage/3">回首頁</a></p>
+                        </div>
+                      <div id="CONTENT">
+                        <h2>用戶名單</h2>
+                        <table border="1">
+                            <tr>
+                            <th>賬號名稱</th>
+                            <th>用戶身份</th>
+                            </tr>
+                            {% for i in u %}
+                            <tr>
+                            <td>{{i.username}}</td>
+                            <td>{{i.userstatus}}</td>
+                            </tr>
+                            {% endfor %}
+                            </table>
+                      </div>
+                      <div id="CONTENT">
+                      </div>
+                      <div id="CONTENT">
+                          <br> <br>
+                        </div>
+                  </div>
+                    <div id="FOOTER">
+                      </div>
+            </body>
+</html>
 
-<body>
-<h2>用戶名單</h2>
-<table border="1">
-    <tr>
-    <th>賬號名稱</th>
-    <th>用戶身份</th>
-    </tr>
-    {% for i in u %}
-    <tr>
-    <td>{{i.username}}</td>
-    <td>{{i.userstatus}}</td>
-    </tr>
-    {% endfor %}
-    </table>
-</body>
+
+
+
+
+
+
+
+
