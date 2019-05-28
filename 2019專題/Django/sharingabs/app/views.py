@@ -197,7 +197,7 @@ def addcase(request,detailid=None):
     sta = caseid.status
     deadline = caseid.deadline
     caseid.numofworker += 1
-    caseid.nameofaccept += (str(u.id)+',')
+    caseid.nameofaccept += (str(u.id)+',3')
     caseid.save()
     save = userdata.objects.create(case = case,username = name,casestatus = sta,casetime = deadline,caseid = id)
     save.save()
@@ -221,7 +221,7 @@ def userpage(request,userid=None):
         pos = u.position
         add = u.address
         pic = u.userimage.url
-        mon = u.money
+        mon = float('%.2f' % u.money)
         sta = u.userstatus
     else:
         uid = userid
