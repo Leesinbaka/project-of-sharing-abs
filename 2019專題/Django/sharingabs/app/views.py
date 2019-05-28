@@ -78,17 +78,20 @@ def detail(request,detailid=None):
     company = id.company
     now = datetime.now()
     if now.month == deadline.month:
-        timeremain = now.day - deadline.day
+        if now.day > deadline.day:
+            timeremain = deadline.day - now.day
+        if deadline.day > now.day:
+            timeremain = deadline.day - now.day    
     elif now.month > deadline.month:
-        timeremain = (now.day+30) - deadline.day
+        timeremain = (now.day+(30*(now.month-deadline.month))) - deadline.day
     elif now.month < deadline.month:
-        timeremain = (deadline.day+30) - now.day
+        timeremain = (deadline.day+(30*(deadline.month-now.month))) - now.day
     qq=timeremain
     if qq>=0:
-        message = "任務過去了"+str(qq)+"天"
+        message = "任務還有"+str(qq)+"天"
     elif qq<0:
         x = (qq-qq-qq)
-        message = "任務還有"+str(x)+"天"
+        message = "任務過去"+str(x)+"天"
     adss = ads.objects.order_by('-id')
     rating = id.Mrating
     numofworker = id.numofworker
@@ -193,15 +196,22 @@ def addcase(request,detailid=None):
     caseid = mission.objects.get(id = detailid)
     u = usersave.objects.get(username = name)
     id = caseid.id
-    case = caseid.Mtitle
-    sta = caseid.status
-    deadline = caseid.deadline
-    caseid.numofworker += 1
-    caseid.nameofaccept += (str(u.id)+',3')
-    caseid.save()
-    save = userdata.objects.create(case = case,username = name,casestatus = sta,casetime = deadline,caseid = id)
-    save.save()
-    messages.success(request,"新增了新的任務")
+    check = userdata.objects.filter(caseid = id)
+    for i in check:
+        if i.username == name:
+            mess="你不要加兩次同一個任務"
+            return render(request,"error.html",locals())
+        elif i.username != name:
+            case = caseid.Mtitle
+            sta = caseid.status
+            deadline = caseid.deadline
+            caseid.numofworker += 1
+            caseid.nameofaccept += (str(u.id)+',3')
+            caseid.save()
+            save = userdata.objects.create(case = case,username = name,casestatus = sta,casetime = deadline,caseid = id)
+            save.save()
+            messages.success(request,"新增了新的任務")
+            return redirect('/firstpage/3')
     return redirect('/firstpage/3')
 def case(request):
     n = request.user.get_username()

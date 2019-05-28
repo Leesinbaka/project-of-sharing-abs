@@ -145,7 +145,16 @@
                 <p><a href="/care/{{user}}/{{id.id}}/">關注此用戶</a></p>
                 {% endif %}
                 {% if request.user.is_authenticated %}
+                {% if user == name %}
+            <p><a href=""onclick="haha()">加入我的任務列表</a></p>
+                  <script>
+                    function haha() {
+                      alert("不要接受自己的任務:3");
+                    }
+                  </script>
+                  {% else %}
                 <p><a href="/addcase/{{id.id}}/">加入我的任務列表</a></p>
+                {% endif %}
                 {% endif %}
                 <p><a href="/firstpage/3">回首頁</a></p>
                 {% if name == user %}

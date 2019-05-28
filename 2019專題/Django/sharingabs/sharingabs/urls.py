@@ -48,7 +48,7 @@ urlpatterns = [
     url(r'^ads/(\w+)/$',views.postads),
     url(r'^adspage/(\d+)/$',views.adspage),
     url(r'^myads/(\w+)/$',views.myads),
-    path('admincheck',views.admincheck),
+    path('admincheck/',views.admincheck),
     url(r'^joinlist/(\d+)/$',views.joinlist),
-
+    path('error/',views.detail),
 ]   + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # we need to add this to make those image visible
