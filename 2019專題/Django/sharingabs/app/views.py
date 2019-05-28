@@ -83,14 +83,14 @@ def detail(request,detailid=None):
         if deadline.day > now.day:
             timeremain = deadline.day - now.day    
     elif now.month > deadline.month:
-        timeremain = (now.day+(30*(now.month-deadline.month))) - deadline.day
+        timeremain = deadline.day-(now.day+(30*(now.month-deadline.month)))
     elif now.month < deadline.month:
         timeremain = (deadline.day+(30*(deadline.month-now.month))) - now.day
     qq=timeremain
     if qq>=0:
         message = "任務還有"+str(qq)+"天"
     elif qq<0:
-        x = (qq-qq-qq)
+        x = abs(qq)
         message = "任務過去"+str(x)+"天"
     adss = ads.objects.order_by('-id')
     rating = id.Mrating
@@ -200,9 +200,6 @@ def addcase(request,detailid=None):
         if i.username == name:
             mess="你不要加兩次同一個任務"
             return render(request,"error.html",locals())
-    name = request.user.get_username()
-    caseid = mission.objects.get(id = detailid)
-    u = usersave.objects.get(username = name)
     id = caseid.id
     case = caseid.Mtitle
     sta = caseid.status
