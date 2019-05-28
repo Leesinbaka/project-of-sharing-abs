@@ -134,7 +134,16 @@
     </div>
       <div id="WRAPPER">
           <div id="SIDE">
+            {% if user == name %}
+            <p><a href=""onclick="myFunction()">關注此用戶</a></p>
+                  <script>
+                    function myFunction() {
+                      alert("不要自己關注自己:3");
+                    }
+                  </script>
+                  {% else %}
                 <p><a href="/care/{{user}}/{{id.id}}/">關注此用戶</a></p>
+                {% endif %}
                 {% if request.user.is_authenticated %}
                 <p><a href="/addcase/{{id.id}}/">加入我的任務列表</a></p>
                 {% endif %}

@@ -319,14 +319,15 @@ def myads(request,user=None):
     return render(request,"myads.html",locals())
 def cares(request,name=None,detailid=None):
     if name != None:
-        c = care()
-        u = usersave.objects.get(username = name)
-        c.careid = u.id
-        c.carenum = 1
-        c.carename = name
-        m = mission.objects.get(id = detailid)
-        c.username = m.Mname
-        c.save()
+        if name != request.get_username:
+            c = care()
+            u = usersave.objects.get(username = name)
+            c.careid = u.id
+            c.carenum = 1
+            c.carename = name
+            m = mission.objects.get(id = detailid)
+            c.username = m.Mname
+            c.save()
     return redirect("/detail/"+detailid)
 def admincheck(request):
     u = usersave.objects.all().order_by('-id')
