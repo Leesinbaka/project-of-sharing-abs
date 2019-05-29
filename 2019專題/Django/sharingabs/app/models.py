@@ -72,5 +72,6 @@ class care(models.Model):
     carenum = models.IntegerField(default=0)
     carename = models.CharField(max_length=40,null=False,default="some error here")
     careid = models.IntegerField(null=False,default=1)
+    carebyid = models.IntegerField(null=False,default=1)
     def __str__(self):
         return self.username

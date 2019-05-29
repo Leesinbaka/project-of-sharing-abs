@@ -150,13 +150,9 @@ def delpost(request,detailid=None):
     return redirect("/firstpage/")
 # login , register , logout 的打法
 def register(request):
-    f = "False"
-    t = "True"
-    checkac = f
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            checkac = f
             user = form.save()
             u = usersave()
             u.username = request.POST.get('name')
@@ -173,7 +169,6 @@ def register(request):
             return redirect('/firstpage/')
     else:
         form = UserCreationForm()
-        checkac = t
     return render(request,"register.html",locals())
 def login(request):
     if request.method =='POST':
@@ -207,7 +202,7 @@ def addcase(request,detailid=None):
     sta = caseid.status
     deadline = caseid.deadline
     caseid.numofworker += 1
-    caseid.nameofaccept += (str(u.id)+',3')
+    caseid.nameofaccept += (str(u.id)+',')
     caseid.save()
     save = userdata.objects.create(case = case,username = name,casestatus = sta,casetime = deadline,caseid = id)
     save.save()
@@ -225,23 +220,37 @@ def mypost(request):
 def userpage(request,userid=None):
     if userid == None:
         n = request.user.get_username()
-        cares = care.objects.order_by('username')[:]
+        cares = care.objects.filter(carename = n)
         u = usersave.objects.get(username = n)
         name = u.username
         pos = u.position
         add = u.address
         pic = u.userimage.url
         mon = float('%.2f' % u.money)
+        word = "關注你的人:"
         sta = u.userstatus
+        c = care.objects.filter(username = n)
+        carename =[]
+        careid = []
+        for n in c:
+            carename.append(n.carename)
+            careid.append(n.careid)
     else:
         uid = userid
         u = usersave.objects.get(id = userid)
         name = u.username
         pos = u.position
         add = u.address
+        word = "關注他的人:"
         pic = u.userimage.url
         mon = "nope"
         sta = u.userstatus
+        c = care.objects.filter(username = u.username)
+        carename =[]
+        careid = []
+        for n in c:
+            carename.append(n.carename)
+            careid.append(n.careid)
     return render(request,'userpage.html',locals())
 def like(request,commentid=None,detailid=None):
     if commentid != None:
@@ -329,16 +338,26 @@ def myads(request,user=None):
     return render(request,"myads.html",locals())
 def cares(request,name=None,detailid=None):
     if name != None:
-        if name != request.get_username:
-            c = care()
-            u = usersave.objects.get(username = name)
-            c.careid = u.id
-            c.carenum = 1
-            c.carename = name
-            m = mission.objects.get(id = detailid)
-            c.username = m.Mname
-            c.save()
+        if name != request.user.get_username():
+            check = care.objects.filter(username = request.user.get_username())
+            for i in check:
+                if i.carename == name:
+                    mess="不能關注一個人兩次!!"
+                    return render(request,"error.html",locals())
+                else:
+                    c = care()
+                    u = usersave.objects.get(username = name)
+                    m = mission.objects.get(id = detailid)
+                    c.careid = u.id
+                    c.carenum = 1
+                    c.carename = name
+                    he = usersave.objects.get(username = request.user.get_username())
+                    c.carebyid = he.id
+                    c.username = request.user.get_username()
+                    c.save()
     return redirect("/detail/"+detailid)
+
+
 def admincheck(request):
     u = usersave.objects.all().order_by('-id')
     return render(request,"admincheck.html",locals())
@@ -349,7 +368,14 @@ def joinlist(request,detailid = None):
     hehe = []
     iddd = []
     for i in qq:
-        u = usersave.objects.get(id = i)
-        hehe.append(u.username)
-        iddd.append(u.id)
+        if qq==None:
+            pass
+        else:
+            try:
+                u = usersave.objects.get(id = i)
+                hehe.append(u.username)
+                iddd.append(u.id)
+            except:
+                hehe.append("用戶不存在")
+                iddd.append("id不存在")
     return render(request,"joinlist.html",locals())

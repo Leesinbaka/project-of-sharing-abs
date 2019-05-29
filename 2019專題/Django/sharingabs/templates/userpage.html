@@ -84,14 +84,42 @@
               </tr>
              
               <tr> 
-                  　<td>關注你的人:{% for w in cares %}
-                  {% if w.username == name %}
-                    <a href ="/userpage/{{w.careid}}">{{w.carename}}</a>
+                  　<td>{{word}}
+                  {% for w in cares %}
+                  {% if w.carename == name %}
+                    <a href ="/userpage/{{w.carebyid}}">{{w.username}}</a>
                    {% endif %}
                 {% endfor %}</td>  
                </tr>
                 
               </table>
+              <table>
+                <th>
+                  
+                  <table border=1>
+                    <tr>
+                    <th>關注的人</th>
+                    </tr>
+                    {% for x in carename %}
+                    <tr>
+                    <td>{{x}}</td>
+                    </tr>
+                    {% endfor %}
+                    </table>
+                </th>
+                <th>
+                    <table border=1>
+                        <tr>
+                    <th>link</th>
+                </tr>
+                    {% for o in careid %}
+                    <tr>
+                    <td><a href="/userpage/{{o}}">Link to userpage</a></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </th>
+            </table>
           </div>
         </div>
         <div id="FOOTER">
